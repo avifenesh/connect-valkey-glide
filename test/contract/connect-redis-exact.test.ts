@@ -91,7 +91,7 @@ async function lifecycleTest(store: ValkeyStore, client: any): Promise<void> {
   expect(allSessions).toBeDefined();
   expect(allSessions!['123']).toBeDefined();
   expect(allSessions!['456']).toBeDefined();
-  expect(allSessions!['123'].foo).toBe('bar');
+  expect((allSessions!['123'] as any).foo).toBe('bar');
 
   await store.destroy('456');
   length = await store.length();

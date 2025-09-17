@@ -1,0 +1,1338 @@
+﻿2025-09-17T08:16:41.8188828Z Current runner version: '2.328.0'
+2025-09-17T08:16:41.8223105Z ##[group]Runner Image Provisioner
+2025-09-17T08:16:41.8224719Z Hosted Compute Agent
+2025-09-17T08:16:41.8225727Z Version: 20250912.392
+2025-09-17T08:16:41.8226705Z Commit: d921fda672a98b64f4f82364647e2f10b2267d0b
+2025-09-17T08:16:41.8227725Z Build Date: 2025-09-12T15:23:14Z
+2025-09-17T08:16:41.8228794Z ##[endgroup]
+2025-09-17T08:16:41.8229611Z ##[group]Operating System
+2025-09-17T08:16:41.8230491Z Ubuntu
+2025-09-17T08:16:41.8231267Z 24.04.3
+2025-09-17T08:16:41.8231970Z LTS
+2025-09-17T08:16:41.8232725Z ##[endgroup]
+2025-09-17T08:16:41.8233568Z ##[group]Runner Image
+2025-09-17T08:16:41.8234800Z Image: ubuntu-24.04
+2025-09-17T08:16:41.8235591Z Version: 20250915.37.1
+2025-09-17T08:16:41.8237366Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20250915.37/images/ubuntu/Ubuntu2404-Readme.md
+2025-09-17T08:16:41.8239910Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20250915.37
+2025-09-17T08:16:41.8241686Z ##[endgroup]
+2025-09-17T08:16:41.8243470Z ##[group]GITHUB_TOKEN Permissions
+2025-09-17T08:16:41.8246372Z Contents: read
+2025-09-17T08:16:41.8247211Z Metadata: read
+2025-09-17T08:16:41.8248006Z Packages: read
+2025-09-17T08:16:41.8248909Z ##[endgroup]
+2025-09-17T08:16:41.8251752Z Secret source: Actions
+2025-09-17T08:16:41.8252814Z Prepare workflow directory
+2025-09-17T08:16:41.8803629Z Prepare all required actions
+2025-09-17T08:16:41.8860539Z Getting action download info
+2025-09-17T08:16:42.2211676Z Download action repository 'actions/checkout@v4' (SHA:08eba0b27e820071cde6df949e0beb9ba4906955)
+2025-09-17T08:16:42.2951529Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2025-09-17T08:16:42.3852501Z Download action repository 'codecov/codecov-action@v4' (SHA:b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238)
+2025-09-17T08:16:42.7177028Z Complete job name: All Tests (Standalone + Cluster)
+2025-09-17T08:16:42.7899074Z ##[group]Run actions/checkout@v4
+2025-09-17T08:16:42.7901200Z with:
+2025-09-17T08:16:42.7901770Z   repository: avifenesh/connect-valkey-glide
+2025-09-17T08:16:42.7902722Z   token: ***
+2025-09-17T08:16:42.7903143Z   ssh-strict: true
+2025-09-17T08:16:42.7903552Z   ssh-user: git
+2025-09-17T08:16:42.7903984Z   persist-credentials: true
+2025-09-17T08:16:42.7904932Z   clean: true
+2025-09-17T08:16:42.7905380Z   sparse-checkout-cone-mode: true
+2025-09-17T08:16:42.7905982Z   fetch-depth: 1
+2025-09-17T08:16:42.7906411Z   fetch-tags: false
+2025-09-17T08:16:42.7906993Z   show-progress: true
+2025-09-17T08:16:42.7907422Z   lfs: false
+2025-09-17T08:16:42.7907805Z   submodules: false
+2025-09-17T08:16:42.7908673Z   set-safe-directory: true
+2025-09-17T08:16:42.7909497Z env:
+2025-09-17T08:16:42.7910183Z   JEST_MAX_WORKERS: 1
+2025-09-17T08:16:42.7910615Z ##[endgroup]
+2025-09-17T08:16:42.9084765Z Syncing repository: avifenesh/connect-valkey-glide
+2025-09-17T08:16:42.9086744Z ##[group]Getting Git version info
+2025-09-17T08:16:42.9087667Z Working directory is '/home/runner/work/connect-valkey-glide/connect-valkey-glide'
+2025-09-17T08:16:42.9088863Z [command]/usr/bin/git version
+2025-09-17T08:16:42.9189824Z git version 2.51.0
+2025-09-17T08:16:42.9217038Z ##[endgroup]
+2025-09-17T08:16:42.9233850Z Temporarily overriding HOME='/home/runner/work/_temp/25272849-2e03-466c-9999-4fab6699ed0a' before making global git config changes
+2025-09-17T08:16:42.9248430Z Adding repository directory to the temporary git global config as a safe directory
+2025-09-17T08:16:42.9249810Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/connect-valkey-glide/connect-valkey-glide
+2025-09-17T08:16:42.9290188Z Deleting the contents of '/home/runner/work/connect-valkey-glide/connect-valkey-glide'
+2025-09-17T08:16:42.9293655Z ##[group]Initializing the repository
+2025-09-17T08:16:42.9298035Z [command]/usr/bin/git init /home/runner/work/connect-valkey-glide/connect-valkey-glide
+2025-09-17T08:16:42.9390458Z hint: Using 'master' as the name for the initial branch. This default branch name
+2025-09-17T08:16:42.9392112Z hint: is subject to change. To configure the initial branch name to use in all
+2025-09-17T08:16:42.9393574Z hint: of your new repositories, which will suppress this warning, call:
+2025-09-17T08:16:42.9395276Z hint:
+2025-09-17T08:16:42.9396263Z hint: 	git config --global init.defaultBranch <name>
+2025-09-17T08:16:42.9397465Z hint:
+2025-09-17T08:16:42.9398594Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2025-09-17T08:16:42.9400432Z hint: 'development'. The just-created branch can be renamed via this command:
+2025-09-17T08:16:42.9401905Z hint:
+2025-09-17T08:16:42.9402599Z hint: 	git branch -m <name>
+2025-09-17T08:16:42.9403423Z hint:
+2025-09-17T08:16:42.9404781Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2025-09-17T08:16:42.9407190Z Initialized empty Git repository in /home/runner/work/connect-valkey-glide/connect-valkey-glide/.git/
+2025-09-17T08:16:42.9410704Z [command]/usr/bin/git remote add origin https://github.com/avifenesh/connect-valkey-glide
+2025-09-17T08:16:42.9445694Z ##[endgroup]
+2025-09-17T08:16:42.9447006Z ##[group]Disabling automatic garbage collection
+2025-09-17T08:16:42.9450752Z [command]/usr/bin/git config --local gc.auto 0
+2025-09-17T08:16:42.9479490Z ##[endgroup]
+2025-09-17T08:16:42.9480894Z ##[group]Setting up auth
+2025-09-17T08:16:42.9487401Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-09-17T08:16:42.9518318Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-09-17T08:16:42.9827217Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-09-17T08:16:42.9857967Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-09-17T08:16:43.0093072Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-09-17T08:16:43.0129022Z ##[endgroup]
+2025-09-17T08:16:43.0146616Z ##[group]Fetching the repository
+2025-09-17T08:16:43.0149110Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +6ea3cedd6740cb87a0b54a1d74eda6a26270145d:refs/remotes/origin/main
+2025-09-17T08:16:43.2509525Z From https://github.com/avifenesh/connect-valkey-glide
+2025-09-17T08:16:43.2510988Z  * [new ref]         6ea3cedd6740cb87a0b54a1d74eda6a26270145d -> origin/main
+2025-09-17T08:16:43.2537288Z ##[endgroup]
+2025-09-17T08:16:43.2538409Z ##[group]Determining the checkout info
+2025-09-17T08:16:43.2539768Z ##[endgroup]
+2025-09-17T08:16:43.2544292Z [command]/usr/bin/git sparse-checkout disable
+2025-09-17T08:16:43.2582116Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2025-09-17T08:16:43.2609997Z ##[group]Checking out the ref
+2025-09-17T08:16:43.2613521Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2025-09-17T08:16:43.2711101Z Switched to a new branch 'main'
+2025-09-17T08:16:43.2713859Z branch 'main' set up to track 'origin/main'.
+2025-09-17T08:16:43.2720971Z ##[endgroup]
+2025-09-17T08:16:43.2754766Z [command]/usr/bin/git log -1 --format=%H
+2025-09-17T08:16:43.2776634Z 6ea3cedd6740cb87a0b54a1d74eda6a26270145d
+2025-09-17T08:16:43.3071110Z ##[group]Run actions/setup-node@v4
+2025-09-17T08:16:43.3072263Z with:
+2025-09-17T08:16:43.3073070Z   node-version: 20.x
+2025-09-17T08:16:43.3073990Z   cache: npm
+2025-09-17T08:16:43.3074988Z   always-auth: false
+2025-09-17T08:16:43.3075909Z   check-latest: false
+2025-09-17T08:16:43.3077115Z   token: ***
+2025-09-17T08:16:43.3077943Z env:
+2025-09-17T08:16:43.3078731Z   JEST_MAX_WORKERS: 1
+2025-09-17T08:16:43.3079647Z ##[endgroup]
+2025-09-17T08:16:43.4849164Z Found in cache @ /opt/hostedtoolcache/node/20.19.5/x64
+2025-09-17T08:16:43.4855484Z ##[group]Environment details
+2025-09-17T08:16:43.8582302Z node: v20.19.5
+2025-09-17T08:16:43.8583256Z npm: 10.8.2
+2025-09-17T08:16:43.8584024Z yarn: 1.22.22
+2025-09-17T08:16:43.8586372Z ##[endgroup]
+2025-09-17T08:16:43.8605066Z [command]/opt/hostedtoolcache/node/20.19.5/x64/bin/npm config get cache
+2025-09-17T08:16:43.9797763Z /home/runner/.npm
+2025-09-17T08:16:44.1185682Z Cache hit for: node-cache-Linux-x64-npm-4abb4b2e1e0b37376aad2e81a81047e2307dfe39f12f5c57964da72669b35281
+2025-09-17T08:16:44.4977573Z Received 39180976 of 39180976 (100.0%), 113.9 MBs/sec
+2025-09-17T08:16:44.4979867Z Cache Size: ~37 MB (39180976 B)
+2025-09-17T08:16:44.5010036Z [command]/usr/bin/tar -xf /home/runner/work/_temp/28ecf777-75dd-4f20-bf0a-80934f04f04c/cache.tzst -P -C /home/runner/work/connect-valkey-glide/connect-valkey-glide --use-compress-program unzstd
+2025-09-17T08:16:44.6636353Z Cache restored successfully
+2025-09-17T08:16:44.6718904Z Cache restored from key: node-cache-Linux-x64-npm-4abb4b2e1e0b37376aad2e81a81047e2307dfe39f12f5c57964da72669b35281
+2025-09-17T08:16:44.6909183Z ##[group]Run npm ci
+2025-09-17T08:16:44.6910118Z [36;1mnpm ci[0m
+2025-09-17T08:16:44.6972183Z shell: /usr/bin/bash -e {0}
+2025-09-17T08:16:44.6973174Z env:
+2025-09-17T08:16:44.6974331Z   JEST_MAX_WORKERS: 1
+2025-09-17T08:16:44.6975201Z ##[endgroup]
+2025-09-17T08:16:47.0121932Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+2025-09-17T08:16:47.1797924Z npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+2025-09-17T08:16:48.3399569Z 
+2025-09-17T08:16:48.3400618Z added 584 packages, and audited 585 packages in 4s
+2025-09-17T08:16:48.3401184Z 
+2025-09-17T08:16:48.3401534Z 111 packages are looking for funding
+2025-09-17T08:16:48.3402113Z   run `npm fund` for details
+2025-09-17T08:16:48.3411660Z 
+2025-09-17T08:16:48.3412082Z found 0 vulnerabilities
+2025-09-17T08:16:48.3768796Z ##[group]Run npm run build
+2025-09-17T08:16:48.3769112Z [36;1mnpm run build[0m
+2025-09-17T08:16:48.3799276Z shell: /usr/bin/bash -e {0}
+2025-09-17T08:16:48.3799538Z env:
+2025-09-17T08:16:48.3799737Z   JEST_MAX_WORKERS: 1
+2025-09-17T08:16:48.3799956Z ##[endgroup]
+2025-09-17T08:16:48.4997291Z 
+2025-09-17T08:16:48.4998022Z > connect-valkey-glide@1.0.0 build
+2025-09-17T08:16:48.4998534Z > tsc
+2025-09-17T08:16:50.3069243Z 
+2025-09-17T08:16:50.3094006Z ##[group]Run docker run -d --name valkey-standalone \
+2025-09-17T08:16:50.3094663Z [36;1mdocker run -d --name valkey-standalone \[0m
+2025-09-17T08:16:50.3094987Z [36;1m  -p 6379:6379 \[0m
+2025-09-17T08:16:50.3095222Z [36;1m  valkey/valkey:8.0.1[0m
+2025-09-17T08:16:50.3125409Z shell: /usr/bin/bash -e {0}
+2025-09-17T08:16:50.3125647Z env:
+2025-09-17T08:16:50.3125834Z   JEST_MAX_WORKERS: 1
+2025-09-17T08:16:50.3126048Z ##[endgroup]
+2025-09-17T08:16:50.3759098Z Unable to find image 'valkey/valkey:8.0.1' locally
+2025-09-17T08:16:50.6132878Z 8.0.1: Pulling from valkey/valkey
+2025-09-17T08:16:50.6766874Z 302e3ee49805: Pulling fs layer
+2025-09-17T08:16:50.6767899Z eee1e0a39046: Pulling fs layer
+2025-09-17T08:16:50.6768694Z 7435edf40050: Pulling fs layer
+2025-09-17T08:16:50.6769451Z c328c7698388: Pulling fs layer
+2025-09-17T08:16:50.6770284Z 613c19d98ed1: Pulling fs layer
+2025-09-17T08:16:50.6771057Z 4f4fb700ef54: Pulling fs layer
+2025-09-17T08:16:50.6771830Z 3ddbb2d8d9f7: Pulling fs layer
+2025-09-17T08:16:50.6772284Z 613c19d98ed1: Waiting
+2025-09-17T08:16:50.6772743Z 4f4fb700ef54: Waiting
+2025-09-17T08:16:50.6773217Z 3ddbb2d8d9f7: Waiting
+2025-09-17T08:16:50.6773579Z c328c7698388: Waiting
+2025-09-17T08:16:50.7592231Z eee1e0a39046: Verifying Checksum
+2025-09-17T08:16:50.7593987Z eee1e0a39046: Download complete
+2025-09-17T08:16:50.7615514Z 7435edf40050: Verifying Checksum
+2025-09-17T08:16:50.7616129Z 7435edf40050: Download complete
+2025-09-17T08:16:50.8433676Z 613c19d98ed1: Verifying Checksum
+2025-09-17T08:16:50.8438011Z 613c19d98ed1: Download complete
+2025-09-17T08:16:50.9096430Z 302e3ee49805: Verifying Checksum
+2025-09-17T08:16:50.9105694Z 302e3ee49805: Download complete
+2025-09-17T08:16:50.9293417Z 4f4fb700ef54: Verifying Checksum
+2025-09-17T08:16:50.9296044Z 4f4fb700ef54: Download complete
+2025-09-17T08:16:50.9331736Z c328c7698388: Verifying Checksum
+2025-09-17T08:16:50.9332252Z c328c7698388: Download complete
+2025-09-17T08:16:50.9808162Z 3ddbb2d8d9f7: Verifying Checksum
+2025-09-17T08:16:50.9808827Z 3ddbb2d8d9f7: Download complete
+2025-09-17T08:16:51.9925326Z 302e3ee49805: Pull complete
+2025-09-17T08:16:52.6030059Z eee1e0a39046: Pull complete
+2025-09-17T08:16:52.6208508Z 7435edf40050: Pull complete
+2025-09-17T08:16:53.3383474Z c328c7698388: Pull complete
+2025-09-17T08:16:53.3537984Z 613c19d98ed1: Pull complete
+2025-09-17T08:16:53.3693486Z 4f4fb700ef54: Pull complete
+2025-09-17T08:16:53.3882165Z 3ddbb2d8d9f7: Pull complete
+2025-09-17T08:16:53.3955969Z Digest: sha256:c5d4f082b76d433a38274ebb38a43cff19829a062928bdcc45611135ef54e608
+2025-09-17T08:16:53.3974937Z Status: Downloaded newer image for valkey/valkey:8.0.1
+2025-09-17T08:16:53.4207124Z 1fa230bd71f1b9edbc4370a10db7b3aacb980a1b4b0fbba72099c322afc40e4c
+2025-09-17T08:16:53.7062655Z ##[group]Run docker compose -f docker-compose.cluster.yml up -d
+2025-09-17T08:16:53.7063502Z [36;1mdocker compose -f docker-compose.cluster.yml up -d[0m
+2025-09-17T08:16:53.7064092Z [36;1msleep 20[0m
+2025-09-17T08:16:53.7107416Z shell: /usr/bin/bash -e {0}
+2025-09-17T08:16:53.7107833Z env:
+2025-09-17T08:16:53.7108172Z   JEST_MAX_WORKERS: 1
+2025-09-17T08:16:53.7108555Z ##[endgroup]
+2025-09-17T08:16:54.1188605Z  redis-node-1 Pulling 
+2025-09-17T08:16:54.1189081Z  redis-node-3 Pulling 
+2025-09-17T08:16:54.1190411Z  redis-cluster-init Pulling 
+2025-09-17T08:16:54.1196157Z  redis-node-2 Pulling 
+2025-09-17T08:16:55.9921716Z  0368fd46e3c6 Pulling fs layer 
+2025-09-17T08:16:55.9922584Z  4c55286bbede Pulling fs layer 
+2025-09-17T08:16:55.9923170Z  5e28347af205 Pulling fs layer 
+2025-09-17T08:16:55.9923686Z  311eca34042e Pulling fs layer 
+2025-09-17T08:16:55.9924618Z  e6fe6f07e192 Pulling fs layer 
+2025-09-17T08:16:55.9925103Z  a2cadbfeca72 Pulling fs layer 
+2025-09-17T08:16:55.9925506Z  4f4fb700ef54 Pulling fs layer 
+2025-09-17T08:16:55.9925783Z  a976ed7e7808 Pulling fs layer 
+2025-09-17T08:16:55.9926021Z  311eca34042e Waiting 
+2025-09-17T08:16:55.9926238Z  e6fe6f07e192 Waiting 
+2025-09-17T08:16:55.9926451Z  a2cadbfeca72 Waiting 
+2025-09-17T08:16:55.9926671Z  4f4fb700ef54 Waiting 
+2025-09-17T08:16:55.9927016Z  a976ed7e7808 Waiting 
+2025-09-17T08:16:56.0632035Z  4c55286bbede Downloading [=================================================> ]     936B/950B
+2025-09-17T08:16:56.0633228Z  4c55286bbede Downloading [==================================================>]     950B/950B
+2025-09-17T08:16:56.0634016Z  4c55286bbede Verifying Checksum 
+2025-09-17T08:16:56.0634692Z  4c55286bbede Download complete 
+2025-09-17T08:16:56.0645403Z  5e28347af205 Downloading [>                                                  ]  2.301kB/173.2kB
+2025-09-17T08:16:56.0753733Z  5e28347af205 Verifying Checksum 
+2025-09-17T08:16:56.0755584Z  5e28347af205 Download complete 
+2025-09-17T08:16:56.0763675Z  0368fd46e3c6 Downloading [>                                                  ]  37.02kB/3.638MB
+2025-09-17T08:16:56.1100693Z  0368fd46e3c6 Verifying Checksum 
+2025-09-17T08:16:56.1101219Z  0368fd46e3c6 Download complete 
+2025-09-17T08:16:56.1111122Z  0368fd46e3c6 Extracting [>                                                  ]  65.54kB/3.638MB
+2025-09-17T08:16:56.1495433Z  311eca34042e Downloading [>                                                  ]  10.52kB/1.003MB
+2025-09-17T08:16:56.1558847Z  e6fe6f07e192 Downloading [>                                                  ]  126.4kB/12.41MB
+2025-09-17T08:16:56.1685156Z  311eca34042e Verifying Checksum 
+2025-09-17T08:16:56.1685980Z  311eca34042e Download complete 
+2025-09-17T08:16:56.2019994Z  0368fd46e3c6 Extracting [==================================================>]  3.638MB/3.638MB
+2025-09-17T08:16:56.2125282Z  a2cadbfeca72 Downloading [==================================================>]      99B/99B
+2025-09-17T08:16:56.2126557Z  a2cadbfeca72 Download complete 
+2025-09-17T08:16:56.2249936Z  0368fd46e3c6 Pull complete 
+2025-09-17T08:16:56.2265384Z  4c55286bbede Extracting [==================================================>]     950B/950B
+2025-09-17T08:16:56.2274660Z  4c55286bbede Extracting [==================================================>]     950B/950B
+2025-09-17T08:16:56.2574436Z  e6fe6f07e192 Downloading [==============================================>    ]  11.62MB/12.41MB
+2025-09-17T08:16:56.2577960Z  4c55286bbede Pull complete 
+2025-09-17T08:16:56.2595606Z  5e28347af205 Extracting [=========>                                         ]  32.77kB/173.2kB
+2025-09-17T08:16:56.2612376Z  5e28347af205 Extracting [==================================================>]  173.2kB/173.2kB
+2025-09-17T08:16:56.2680482Z  e6fe6f07e192 Verifying Checksum 
+2025-09-17T08:16:56.2680975Z  e6fe6f07e192 Download complete 
+2025-09-17T08:16:56.2870270Z  5e28347af205 Extracting [==================================================>]  173.2kB/173.2kB
+2025-09-17T08:16:56.3027130Z  4f4fb700ef54 Downloading [==================================================>]      32B/32B
+2025-09-17T08:16:56.3027944Z  4f4fb700ef54 Verifying Checksum 
+2025-09-17T08:16:56.3028379Z  4f4fb700ef54 Download complete 
+2025-09-17T08:16:56.3091958Z  a976ed7e7808 Download complete 
+2025-09-17T08:16:56.3992447Z  5e28347af205 Pull complete 
+2025-09-17T08:16:56.4015121Z  311eca34042e Extracting [=>                                                 ]  32.77kB/1.003MB
+2025-09-17T08:16:56.4243407Z  311eca34042e Extracting [==================================================>]  1.003MB/1.003MB
+2025-09-17T08:16:56.4248473Z  311eca34042e Extracting [==================================================>]  1.003MB/1.003MB
+2025-09-17T08:16:56.4337817Z  311eca34042e Pull complete 
+2025-09-17T08:16:56.4371563Z  e6fe6f07e192 Extracting [>                                                  ]  131.1kB/12.41MB
+2025-09-17T08:16:56.4482605Z  0368fd46e3c6 Already exists 
+2025-09-17T08:16:56.4500322Z  4c55286bbede Already exists 
+2025-09-17T08:16:56.4518339Z  5e28347af205 Already exists 
+2025-09-17T08:16:56.4537199Z  311eca34042e Already exists 
+2025-09-17T08:16:56.4550725Z  e6fe6f07e192 Pulling fs layer 
+2025-09-17T08:16:56.4551242Z  a2cadbfeca72 Pulling fs layer 
+2025-09-17T08:16:56.4551710Z  4f4fb700ef54 Pulling fs layer 
+2025-09-17T08:16:56.4552137Z  a976ed7e7808 Pulling fs layer 
+2025-09-17T08:16:56.4552558Z  a976ed7e7808 Download complete 
+2025-09-17T08:16:56.4553226Z  e6fe6f07e192 Extracting [>                                                  ]  131.1kB/12.41MB
+2025-09-17T08:16:56.4553878Z  a2cadbfeca72 Download complete 
+2025-09-17T08:16:56.4554487Z  4f4fb700ef54 Download complete 
+2025-09-17T08:16:56.5387349Z  e6fe6f07e192 Extracting [==========================>                        ]  6.685MB/12.41MB
+2025-09-17T08:16:56.5388356Z  e6fe6f07e192 Extracting [==========================>                        ]  6.685MB/12.41MB
+2025-09-17T08:16:56.6050527Z  e6fe6f07e192 Extracting [==================================================>]  12.41MB/12.41MB
+2025-09-17T08:16:56.6052582Z  e6fe6f07e192 Extracting [==================================================>]  12.41MB/12.41MB
+2025-09-17T08:16:56.6250137Z  e6fe6f07e192 Pull complete 
+2025-09-17T08:16:56.6250627Z  e6fe6f07e192 Pull complete 
+2025-09-17T08:16:56.6265467Z  a2cadbfeca72 Extracting [==================================================>]      99B/99B
+2025-09-17T08:16:56.6266376Z  a2cadbfeca72 Extracting [==================================================>]      99B/99B
+2025-09-17T08:16:56.6268514Z  a2cadbfeca72 Extracting [==================================================>]      99B/99B
+2025-09-17T08:16:56.6269426Z  a2cadbfeca72 Extracting [==================================================>]      99B/99B
+2025-09-17T08:16:56.6360801Z  a2cadbfeca72 Pull complete 
+2025-09-17T08:16:56.6361140Z  a2cadbfeca72 Pull complete 
+2025-09-17T08:16:56.6379178Z  4f4fb700ef54 Extracting [==================================================>]      32B/32B
+2025-09-17T08:16:56.6380163Z  4f4fb700ef54 Extracting [==================================================>]      32B/32B
+2025-09-17T08:16:56.6383197Z  4f4fb700ef54 Extracting [==================================================>]      32B/32B
+2025-09-17T08:16:56.6383790Z  4f4fb700ef54 Extracting [==================================================>]      32B/32B
+2025-09-17T08:16:56.6480279Z  4f4fb700ef54 Pull complete 
+2025-09-17T08:16:56.6480815Z  4f4fb700ef54 Pull complete 
+2025-09-17T08:16:56.6497878Z  a976ed7e7808 Extracting [==================================================>]     574B/574B
+2025-09-17T08:16:56.6498777Z  a976ed7e7808 Extracting [==================================================>]     574B/574B
+2025-09-17T08:16:56.6500755Z  a976ed7e7808 Extracting [==================================================>]     574B/574B
+2025-09-17T08:16:56.6501637Z  a976ed7e7808 Extracting [==================================================>]     574B/574B
+2025-09-17T08:16:56.6613984Z  a976ed7e7808 Pull complete 
+2025-09-17T08:16:56.6614500Z  a976ed7e7808 Pull complete 
+2025-09-17T08:16:57.2232897Z  redis-node-3 Pulled 
+2025-09-17T08:16:57.2233448Z  redis-cluster-init Pulled 
+2025-09-17T08:16:57.2239408Z  redis-node-1 Pulled 
+2025-09-17T08:16:57.2956580Z  redis-node-2 Pulled 
+2025-09-17T08:16:57.2975186Z  Network connect-valkey-glide_redis-cluster  Creating
+2025-09-17T08:16:57.3322489Z  Network connect-valkey-glide_redis-cluster  Created
+2025-09-17T08:16:57.3328248Z  Container connect-valkey-glide-redis-node-2-1  Creating
+2025-09-17T08:16:57.3329027Z  Container connect-valkey-glide-redis-node-3-1  Creating
+2025-09-17T08:16:57.3329771Z  Container connect-valkey-glide-redis-node-1-1  Creating
+2025-09-17T08:16:57.3630769Z  Container connect-valkey-glide-redis-node-3-1  Created
+2025-09-17T08:16:57.3631717Z  Container connect-valkey-glide-redis-node-2-1  Created
+2025-09-17T08:16:57.3643746Z  Container connect-valkey-glide-redis-node-1-1  Created
+2025-09-17T08:16:57.3644738Z  Container connect-valkey-glide-redis-cluster-init-1  Creating
+2025-09-17T08:16:57.3774415Z  Container connect-valkey-glide-redis-cluster-init-1  Created
+2025-09-17T08:16:57.3789410Z  Container connect-valkey-glide-redis-node-3-1  Starting
+2025-09-17T08:16:57.3790271Z  Container connect-valkey-glide-redis-node-2-1  Starting
+2025-09-17T08:16:57.3791301Z  Container connect-valkey-glide-redis-node-1-1  Starting
+2025-09-17T08:16:57.5840320Z  Container connect-valkey-glide-redis-node-2-1  Started
+2025-09-17T08:16:57.5956450Z  Container connect-valkey-glide-redis-node-3-1  Started
+2025-09-17T08:16:57.6079146Z  Container connect-valkey-glide-redis-node-1-1  Started
+2025-09-17T08:16:57.6080237Z  Container connect-valkey-glide-redis-cluster-init-1  Starting
+2025-09-17T08:16:57.7181769Z  Container connect-valkey-glide-redis-cluster-init-1  Started
+2025-09-17T08:17:17.7271707Z ##[group]Run until docker exec valkey-standalone valkey-cli ping; do
+2025-09-17T08:17:17.7272232Z [36;1muntil docker exec valkey-standalone valkey-cli ping; do[0m
+2025-09-17T08:17:17.7272613Z [36;1m  echo "Waiting for standalone..."[0m
+2025-09-17T08:17:17.7272885Z [36;1m  sleep 1[0m
+2025-09-17T08:17:17.7273077Z [36;1mdone[0m
+2025-09-17T08:17:17.7273420Z [36;1mdocker exec $(docker ps -qf "name=redis-node-1") redis-cli -p 8001 cluster info[0m
+2025-09-17T08:17:17.7302962Z shell: /usr/bin/bash -e {0}
+2025-09-17T08:17:17.7303201Z env:
+2025-09-17T08:17:17.7303382Z   JEST_MAX_WORKERS: 1
+2025-09-17T08:17:17.7303581Z ##[endgroup]
+2025-09-17T08:17:17.7852510Z PONG
+2025-09-17T08:17:17.8511847Z cluster_state:ok
+2025-09-17T08:17:17.8512819Z cluster_slots_assigned:16384
+2025-09-17T08:17:17.8513283Z cluster_slots_ok:16384
+2025-09-17T08:17:17.8513679Z cluster_slots_pfail:0
+2025-09-17T08:17:17.8514062Z cluster_slots_fail:0
+2025-09-17T08:17:17.8514772Z cluster_known_nodes:3
+2025-09-17T08:17:17.8515213Z cluster_size:3
+2025-09-17T08:17:17.8515603Z cluster_current_epoch:3
+2025-09-17T08:17:17.8515992Z cluster_my_epoch:1
+2025-09-17T08:17:17.8516949Z cluster_stats_messages_ping_sent:18
+2025-09-17T08:17:17.8517546Z cluster_stats_messages_pong_sent:20
+2025-09-17T08:17:17.8518002Z cluster_stats_messages_sent:38
+2025-09-17T08:17:17.8518516Z cluster_stats_messages_ping_received:18
+2025-09-17T08:17:17.8519071Z cluster_stats_messages_pong_received:18
+2025-09-17T08:17:17.8519664Z cluster_stats_messages_meet_received:2
+2025-09-17T08:17:17.8520155Z cluster_stats_messages_received:38
+2025-09-17T08:17:17.8520759Z total_cluster_links_buffer_limit_exceeded:0
+2025-09-17T08:17:17.8584919Z ##[group]Run export JEST_MAX_WORKERS=2
+2025-09-17T08:17:17.8585298Z [36;1mexport JEST_MAX_WORKERS=2[0m
+2025-09-17T08:17:17.8585559Z [36;1mnpm run test:coverage[0m
+2025-09-17T08:17:17.8614540Z shell: /usr/bin/bash -e {0}
+2025-09-17T08:17:17.8614782Z env:
+2025-09-17T08:17:17.8614959Z   JEST_MAX_WORKERS: 1
+2025-09-17T08:17:17.8615169Z ##[endgroup]
+2025-09-17T08:17:17.9708652Z 
+2025-09-17T08:17:17.9709246Z > connect-valkey-glide@1.0.0 test:coverage
+2025-09-17T08:17:17.9709802Z > jest --coverage
+2025-09-17T08:17:17.9709944Z 
+2025-09-17T08:17:24.4810911Z   console.error
+2025-09-17T08:17:24.4811620Z     ValkeyStore error: ClosingError: Unable to execute requests; the client is closed. Please create a new client.
+2025-09-17T08:17:24.4813365Z         at GlideClient.ensureClientIsOpen (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:445:19)
+2025-09-17T08:17:24.4815906Z         at GlideClient.createWritePromise (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:461:14)
+2025-09-17T08:17:24.4817608Z         at GlideClient.get (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:734:21)
+2025-09-17T08:17:24.4818526Z         at get (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:106:19)
+2025-09-17T08:17:24.4819181Z         at fn (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:34:3)
+2025-09-17T08:17:24.4819959Z         at ValkeyStore.optionalCb [as get] (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:132:12)
+2025-09-17T08:17:24.4820863Z         at session (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/express-session/index.js:493:11)
+2025-09-17T08:17:24.4821814Z         at Layer.handleRequest (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/lib/layer.js:152:17)
+2025-09-17T08:17:24.4822732Z         at trimPrefix (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:342:13)
+2025-09-17T08:17:24.4823537Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:297:9
+2025-09-17T08:17:24.4824576Z         at processParams (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:582:12)
+2025-09-17T08:17:24.4825432Z         at next (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:291:5)
+2025-09-17T08:17:24.4826328Z         at jsonParser (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/body-parser/lib/types/json.js:100:7)
+2025-09-17T08:17:24.4827304Z         at Layer.handleRequest (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/lib/layer.js:152:17)
+2025-09-17T08:17:24.4828234Z         at trimPrefix (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:342:13)
+2025-09-17T08:17:24.4829035Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:297:9
+2025-09-17T08:17:24.4829855Z         at processParams (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:582:12)
+2025-09-17T08:17:24.4830777Z         at next (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:291:5)
+2025-09-17T08:17:24.4832179Z         at Function.handle (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:186:3)
+2025-09-17T08:17:24.4834386Z         at Function.handle (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/express/lib/application.js:177:15)
+2025-09-17T08:17:24.4835983Z         at Server.app (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/express/lib/express.js:38:9)
+2025-09-17T08:17:24.4836980Z         at Server.emit (node:events:524:28)
+2025-09-17T08:17:24.4837843Z         at parserOnIncoming (node:_http_server:1141:12)
+2025-09-17T08:17:24.4838687Z         at HTTPParser.parserOnHeadersComplete (node:_http_common:118:17)
+2025-09-17T08:17:24.4839193Z 
+2025-09-17T08:17:24.4840723Z     [0m [90m 86 |[39m   [36mprivate[39m handleError(error[33m:[39m [33mError[39m[33m,[39m callback[33m?[39m[33m:[39m (err[33m?[39m[33m:[39m any) [33m=>[39m [36mvoid[39m)[33m:[39m [36mvoid[39m {
+2025-09-17T08:17:24.4842115Z      [90m 87 |[39m     [36mif[39m ([36mthis[39m[33m.[39mlogErrors) {
+2025-09-17T08:17:24.4843285Z     [31m[1m>[22m[39m[90m 88 |[39m       console[33m.[39merror([32m'ValkeyStore error:'[39m[33m,[39m error)[33m;[39m
+2025-09-17T08:17:24.4844391Z      [90m    |[39m               [31m[1m^[22m[39m
+2025-09-17T08:17:24.4844917Z      [90m 89 |[39m     }
+2025-09-17T08:17:24.4845435Z      [90m 90 |[39m     [36mif[39m (callback) {
+2025-09-17T08:17:24.4846078Z      [90m 91 |[39m       callback(error)[33m;[39m[0m
+2025-09-17T08:17:24.4846436Z 
+2025-09-17T08:17:24.4846764Z       at ValkeyStore.error [as handleError] (src/index.ts:88:15)
+2025-09-17T08:17:24.4847359Z       at handleError (src/index.ts:128:16)
+2025-09-17T08:17:24.4847667Z 
+2025-09-17T08:17:24.5003143Z PASS test/e2e/express-integration.test.ts (5.973 s)
+2025-09-17T08:17:24.5025111Z   Express Integration E2E Tests
+2025-09-17T08:17:24.5025565Z     Basic Session Flow
+2025-09-17T08:17:24.5026341Z       ✓ should handle complete user session lifecycle (49 ms)
+2025-09-17T08:17:24.5027160Z       ✓ should handle shopping cart session state (15 ms)
+2025-09-17T08:17:24.5027677Z     Session Persistence
+2025-09-17T08:17:24.5028311Z       ✓ should persist sessions across server restarts (11 ms)
+2025-09-17T08:17:24.5029110Z       ✓ should handle session expiration correctly (3010 ms)
+2025-09-17T08:17:24.5029658Z     Concurrent Users
+2025-09-17T08:17:24.5030236Z       ✓ should handle multiple concurrent users (59 ms)
+2025-09-17T08:17:24.5030979Z       ✓ should isolate user sessions correctly (24 ms)
+2025-09-17T08:17:24.5031480Z     Error Scenarios
+2025-09-17T08:17:24.5032106Z       ✓ should handle Valkey connection issues gracefully (57 ms)
+2025-09-17T08:17:24.5032910Z       ✓ should handle session store errors gracefully (3 ms)
+2025-09-17T08:17:24.5033301Z 
+2025-09-17T08:17:24.9695718Z   console.log
+2025-09-17T08:17:24.9696320Z     Testing 1000 concurrent session creations...
+2025-09-17T08:17:24.9696731Z 
+2025-09-17T08:17:24.9697118Z       at Object.<anonymous> (test/e2e/load-test.test.ts:111:15)
+2025-09-17T08:17:24.9697612Z 
+2025-09-17T08:17:26.0112795Z   console.log
+2025-09-17T08:17:26.0113656Z     Successful requests: 1000
+2025-09-17T08:17:26.0114578Z 
+2025-09-17T08:17:26.0115312Z       at Object.<anonymous> (test/e2e/load-test.test.ts:125:15)
+2025-09-17T08:17:26.0116313Z 
+2025-09-17T08:17:26.0121190Z   console.log
+2025-09-17T08:17:26.0121544Z     Failed requests: 0
+2025-09-17T08:17:26.0121763Z 
+2025-09-17T08:17:26.0122128Z       at Object.<anonymous> (test/e2e/load-test.test.ts:126:15)
+2025-09-17T08:17:26.0122519Z 
+2025-09-17T08:17:26.0134851Z   console.log
+2025-09-17T08:17:26.0135520Z     Total time: 1040.41ms
+2025-09-17T08:17:26.0136741Z 
+2025-09-17T08:17:26.0137102Z       at Object.<anonymous> (test/e2e/load-test.test.ts:127:15)
+2025-09-17T08:17:26.0137527Z 
+2025-09-17T08:17:26.0141877Z   console.log
+2025-09-17T08:17:26.0142447Z     Requests/second: 961.16
+2025-09-17T08:17:26.0142914Z 
+2025-09-17T08:17:26.0144350Z       at Object.<anonymous> (test/e2e/load-test.test.ts:128:15)
+2025-09-17T08:17:26.0147548Z 
+2025-09-17T08:17:26.0668309Z   console.log
+2025-09-17T08:17:26.0668907Z     Testing 2000 sequential operations across 100 agents...
+2025-09-17T08:17:26.0669328Z 
+2025-09-17T08:17:26.0669692Z       at Object.<anonymous> (test/e2e/load-test.test.ts:148:15)
+2025-09-17T08:17:26.0670106Z 
+2025-09-17T08:17:28.0419392Z   console.log
+2025-09-17T08:17:28.0419839Z     Sequential operations: 1012.89 ops/sec
+2025-09-17T08:17:28.0420084Z 
+2025-09-17T08:17:28.0420671Z       at Object.<anonymous> (test/e2e/load-test.test.ts:179:15)
+2025-09-17T08:17:28.0420968Z 
+2025-09-17T08:17:28.0423098Z   console.log
+2025-09-17T08:17:28.0423445Z     Total time: 1974.55ms
+2025-09-17T08:17:28.0423677Z 
+2025-09-17T08:17:28.0423947Z       at Object.<anonymous> (test/e2e/load-test.test.ts:180:15)
+2025-09-17T08:17:28.0424413Z 
+2025-09-17T08:17:28.0468410Z   console.log
+2025-09-17T08:17:28.0468985Z     Testing 500 users with ~50KB sessions each...
+2025-09-17T08:17:28.0469433Z 
+2025-09-17T08:17:28.0469718Z       at Object.<anonymous> (test/e2e/load-test.test.ts:207:15)
+2025-09-17T08:17:28.0470034Z 
+2025-09-17T08:17:30.7727221Z   console.log
+2025-09-17T08:17:30.7727761Z     Large session test completed in 2721.73ms
+2025-09-17T08:17:30.7728103Z 
+2025-09-17T08:17:30.7728400Z       at Object.<anonymous> (test/e2e/load-test.test.ts:237:15)
+2025-09-17T08:17:30.7728658Z 
+2025-09-17T08:17:30.7731340Z   console.log
+2025-09-17T08:17:30.7731713Z     Sessions per second: 183.71
+2025-09-17T08:17:30.7731892Z 
+2025-09-17T08:17:30.7732112Z       at Object.<anonymous> (test/e2e/load-test.test.ts:238:15)
+2025-09-17T08:17:30.7732356Z 
+2025-09-17T08:17:30.7735691Z   console.log
+2025-09-17T08:17:30.7736022Z     Sessions created: 500
+2025-09-17T08:17:30.7736173Z 
+2025-09-17T08:17:30.7736356Z       at Object.<anonymous> (test/e2e/load-test.test.ts:239:15)
+2025-09-17T08:17:30.7736600Z 
+2025-09-17T08:17:30.7779215Z   console.log
+2025-09-17T08:17:30.7779675Z     Creating 5000 active sessions...
+2025-09-17T08:17:30.7779982Z 
+2025-09-17T08:17:30.7780251Z       at Object.<anonymous> (test/e2e/load-test.test.ts:247:15)
+2025-09-17T08:17:30.7780506Z 
+2025-09-17T08:17:37.7624527Z   console.log
+2025-09-17T08:17:37.7625057Z     Testing performance with many active sessions...
+2025-09-17T08:17:37.7625305Z 
+2025-09-17T08:17:37.7625517Z       at Object.<anonymous> (test/e2e/load-test.test.ts:267:15)
+2025-09-17T08:17:37.7625771Z 
+2025-09-17T08:17:37.9919743Z   console.log
+2025-09-17T08:17:37.9920409Z     Performance with 5000 existing sessions: 436.83 req/sec
+2025-09-17T08:17:37.9920874Z 
+2025-09-17T08:17:37.9921251Z       at Object.<anonymous> (test/e2e/load-test.test.ts:279:15)
+2025-09-17T08:17:37.9921690Z 
+2025-09-17T08:17:38.0075633Z   console.log
+2025-09-17T08:17:38.0076053Z     Creating 2000 sessions for bulk retrieval test...
+2025-09-17T08:17:38.0076303Z 
+2025-09-17T08:17:38.0076512Z       at Object.<anonymous> (test/e2e/load-test.test.ts:290:15)
+2025-09-17T08:17:38.0076783Z 
+2025-09-17T08:17:42.4903383Z   console.log
+2025-09-17T08:17:42.4903969Z     Testing bulk session operations...
+2025-09-17T08:17:42.4904572Z 
+2025-09-17T08:17:42.4904917Z       at Object.<anonymous> (test/e2e/load-test.test.ts:299:15)
+2025-09-17T08:17:42.4905366Z 
+2025-09-17T08:17:42.5803256Z   console.log
+2025-09-17T08:17:42.5803834Z     Retrieved all 2000 sessions in 89.28ms
+2025-09-17T08:17:42.5804423Z 
+2025-09-17T08:17:42.5804792Z       at Object.<anonymous> (test/e2e/load-test.test.ts:313:15)
+2025-09-17T08:17:42.5805218Z 
+2025-09-17T08:17:42.5841191Z   console.log
+2025-09-17T08:17:42.5841696Z     Retrieved 2000 session IDs in 2.89ms
+2025-09-17T08:17:42.5842040Z 
+2025-09-17T08:17:42.5842378Z       at Object.<anonymous> (test/e2e/load-test.test.ts:329:15)
+2025-09-17T08:17:42.5842831Z 
+2025-09-17T08:17:42.5866307Z   console.log
+2025-09-17T08:17:42.5866769Z     Counted 2000 sessions in 1.94ms
+2025-09-17T08:17:42.5867082Z 
+2025-09-17T08:17:42.5867418Z       at Object.<anonymous> (test/e2e/load-test.test.ts:343:15)
+2025-09-17T08:17:42.5867832Z 
+2025-09-17T08:17:42.5938049Z   console.log
+2025-09-17T08:17:42.5938938Z     Creating 1000 sessions with short TTL...
+2025-09-17T08:17:42.5939242Z 
+2025-09-17T08:17:42.5939530Z       at Object.<anonymous> (test/e2e/load-test.test.ts:374:15)
+2025-09-17T08:17:42.5939900Z 
+2025-09-17T08:17:44.8608212Z   console.log
+2025-09-17T08:17:44.8608566Z     Waiting for sessions to expire...
+2025-09-17T08:17:44.8608771Z 
+2025-09-17T08:17:44.8608972Z       at Object.<anonymous> (test/e2e/load-test.test.ts:395:15)
+2025-09-17T08:17:44.8609218Z 
+2025-09-17T08:17:49.8624306Z   console.log
+2025-09-17T08:17:49.8624689Z     Checking expired sessions...
+2025-09-17T08:17:49.8624944Z 
+2025-09-17T08:17:49.8625261Z       at Object.<anonymous> (test/e2e/load-test.test.ts:399:15)
+2025-09-17T08:17:49.8625886Z 
+2025-09-17T08:17:49.8651598Z   console.log
+2025-09-17T08:17:49.8652006Z     Remaining sessions: 0 (was 1000)
+2025-09-17T08:17:49.8652298Z 
+2025-09-17T08:17:49.8652605Z       at Object.<anonymous> (test/e2e/load-test.test.ts:409:15)
+2025-09-17T08:17:49.8652999Z 
+2025-09-17T08:17:49.8658948Z   console.log
+2025-09-17T08:17:49.8659907Z     Stress testing with 2000 operations in batches of 100...
+2025-09-17T08:17:49.8660521Z 
+2025-09-17T08:17:49.8660927Z       at Object.<anonymous> (test/e2e/load-test.test.ts:422:15)
+2025-09-17T08:17:49.8661382Z 
+2025-09-17T08:17:50.0944474Z   console.log
+2025-09-17T08:17:50.0944970Z     Completed batch 1/20 in 227.91ms
+2025-09-17T08:17:50.0945254Z 
+2025-09-17T08:17:50.0945553Z       at Object.<anonymous> (test/e2e/load-test.test.ts:457:19)
+2025-09-17T08:17:50.0945957Z 
+2025-09-17T08:17:51.2325593Z   console.log
+2025-09-17T08:17:51.2326044Z     Completed batch 6/20 in 227.80ms
+2025-09-17T08:17:51.2326329Z 
+2025-09-17T08:17:51.2326633Z       at Object.<anonymous> (test/e2e/load-test.test.ts:457:19)
+2025-09-17T08:17:51.2327014Z 
+2025-09-17T08:17:52.3888296Z   console.log
+2025-09-17T08:17:52.3888747Z     Completed batch 11/20 in 231.15ms
+2025-09-17T08:17:52.3889029Z 
+2025-09-17T08:17:52.3889334Z       at Object.<anonymous> (test/e2e/load-test.test.ts:457:19)
+2025-09-17T08:17:52.3889731Z 
+2025-09-17T08:17:53.5484727Z   console.log
+2025-09-17T08:17:53.5485189Z     Completed batch 16/20 in 232.75ms
+2025-09-17T08:17:53.5485396Z 
+2025-09-17T08:17:53.5485604Z       at Object.<anonymous> (test/e2e/load-test.test.ts:457:19)
+2025-09-17T08:17:53.5485858Z 
+2025-09-17T08:17:54.6641530Z   console.log
+2025-09-17T08:17:54.6642267Z     Extreme load test: 417.07 ops/sec over 2000 operations
+2025-09-17T08:17:54.6642799Z 
+2025-09-17T08:17:54.6643256Z       at Object.<anonymous> (test/e2e/load-test.test.ts:462:15)
+2025-09-17T08:17:54.6643759Z 
+2025-09-17T08:17:54.6666311Z   console.log
+2025-09-17T08:17:54.6666680Z     Final session count: 1313
+2025-09-17T08:17:54.6666952Z 
+2025-09-17T08:17:54.6667227Z       at Object.<anonymous> (test/e2e/load-test.test.ts:472:15)
+2025-09-17T08:17:54.6667485Z 
+2025-09-17T08:17:54.7120491Z PASS test/e2e/load-test.test.ts (30.202 s)
+2025-09-17T08:17:54.7121176Z   Load Testing E2E
+2025-09-17T08:17:54.7121647Z     High Volume Session Creation
+2025-09-17T08:17:54.7122704Z       ✓ should handle 1000 concurrent session creations (1100 ms)
+2025-09-17T08:17:54.7123693Z       ✓ should handle rapid sequential session operations (1980 ms)
+2025-09-17T08:17:54.7124864Z     Memory and Performance Under Load
+2025-09-17T08:17:54.7125676Z       ✓ should handle large session data under load (2732 ms)
+2025-09-17T08:17:54.7126594Z       ✓ should maintain performance with many active sessions (7230 ms)
+2025-09-17T08:17:54.7127273Z     Session Store Operations Under Load
+2025-09-17T08:17:54.7128090Z       ✓ should handle bulk session retrieval efficiently (4586 ms)
+2025-09-17T08:17:54.7128886Z       ✓ should handle session cleanup under load (7272 ms)
+2025-09-17T08:17:54.7129384Z     Stress Testing
+2025-09-17T08:17:54.7129972Z       ✓ should handle extreme concurrent load (4808 ms)
+2025-09-17T08:17:54.7130327Z 
+2025-09-17T08:17:55.2950464Z   console.log
+2025-09-17T08:17:55.2950822Z     Sequential writes: 3778 ops/sec
+2025-09-17T08:17:55.2951017Z 
+2025-09-17T08:17:55.2951676Z       at Object.<anonymous> (test/integration/performance.test.ts:56:15)
+2025-09-17T08:17:55.2951969Z 
+2025-09-17T08:17:55.5572595Z   console.log
+2025-09-17T08:17:55.5572934Z     Sequential reads: 3821 ops/sec
+2025-09-17T08:17:55.5573141Z 
+2025-09-17T08:17:55.5573385Z       at Object.<anonymous> (test/integration/performance.test.ts:71:15)
+2025-09-17T08:17:55.5573673Z 
+2025-09-17T08:17:55.5862078Z   console.log
+2025-09-17T08:17:55.5862648Z     Concurrent writes: 24764 ops/sec
+2025-09-17T08:17:55.5862995Z 
+2025-09-17T08:17:55.5863873Z       at Object.<anonymous> (test/integration/performance.test.ts:97:15)
+2025-09-17T08:17:55.5864588Z 
+2025-09-17T08:17:55.6017005Z   console.log
+2025-09-17T08:17:55.6017911Z     Concurrent reads: 33306 ops/sec
+2025-09-17T08:17:55.6020033Z 
+2025-09-17T08:17:55.6020521Z       at Object.<anonymous> (test/integration/performance.test.ts:113:15)
+2025-09-17T08:17:55.6021046Z 
+2025-09-17T08:17:55.6023359Z   console.log
+2025-09-17T08:17:55.6024049Z     Write efficiency: 49527.29 ops/sec/session
+2025-09-17T08:17:55.6024934Z 
+2025-09-17T08:17:55.6025597Z       at Object.<anonymous> (test/integration/performance.test.ts:123:15)
+2025-09-17T08:17:55.6026427Z 
+2025-09-17T08:17:55.6027535Z   console.log
+2025-09-17T08:17:55.6028467Z     Read efficiency: 66611.84 ops/sec/session
+2025-09-17T08:17:55.6029377Z 
+2025-09-17T08:17:55.6029776Z       at Object.<anonymous> (test/integration/performance.test.ts:124:15)
+2025-09-17T08:17:55.6030522Z 
+2025-09-17T08:17:55.6124054Z   console.log
+2025-09-17T08:17:55.6124622Z     Large session set: 1.56ms
+2025-09-17T08:17:55.6124910Z 
+2025-09-17T08:17:55.6125187Z       at Object.<anonymous> (test/integration/performance.test.ts:162:15)
+2025-09-17T08:17:55.6125489Z 
+2025-09-17T08:17:55.6127250Z   console.log
+2025-09-17T08:17:55.6127591Z     Large session get: 1.19ms
+2025-09-17T08:17:55.6127858Z 
+2025-09-17T08:17:55.6128191Z       at Object.<anonymous> (test/integration/performance.test.ts:163:15)
+2025-09-17T08:17:55.6128474Z 
+2025-09-17T08:17:55.6523882Z   console.log
+2025-09-17T08:17:55.6524520Z     1000 small sessions: 24.19ms
+2025-09-17T08:17:55.6524708Z 
+2025-09-17T08:17:55.6524955Z       at Object.<anonymous> (test/integration/performance.test.ts:214:15)
+2025-09-17T08:17:55.6525247Z 
+2025-09-17T08:17:55.6526432Z   console.log
+2025-09-17T08:17:55.6526772Z     10 large sessions: 6.48ms
+2025-09-17T08:17:55.6527027Z 
+2025-09-17T08:17:55.6527338Z       at Object.<anonymous> (test/integration/performance.test.ts:215:15)
+2025-09-17T08:17:55.6527615Z 
+2025-09-17T08:17:55.6701493Z   console.log
+2025-09-17T08:17:55.6702051Z     Storing sessions...
+2025-09-17T08:17:55.6702296Z 
+2025-09-17T08:17:55.6702696Z       at Object.<anonymous> (test/integration/performance.test.ts:229:15)
+2025-09-17T08:17:55.6703156Z 
+2025-09-17T08:17:55.6936883Z   console.log
+2025-09-17T08:17:55.6937418Z     Stored 1000 sessions in 22.93ms
+2025-09-17T08:17:55.6937757Z 
+2025-09-17T08:17:55.6938160Z       at Object.<anonymous> (test/integration/performance.test.ts:242:15)
+2025-09-17T08:17:55.6938688Z 
+2025-09-17T08:17:55.6985795Z   console.log
+2025-09-17T08:17:55.6986202Z     Length scan: 4.34ms
+2025-09-17T08:17:55.6986459Z 
+2025-09-17T08:17:55.6986899Z       at Object.<anonymous> (test/integration/performance.test.ts:255:15)
+2025-09-17T08:17:55.6987402Z 
+2025-09-17T08:17:55.7034544Z   console.log
+2025-09-17T08:17:55.7034904Z     IDs scan: 4.04ms
+2025-09-17T08:17:55.7035140Z 
+2025-09-17T08:17:55.7035501Z       at Object.<anonymous> (test/integration/performance.test.ts:269:15)
+2025-09-17T08:17:55.7035810Z 
+2025-09-17T08:17:55.7172309Z   console.log
+2025-09-17T08:17:55.7172845Z     All sessions retrieval: 12.85ms
+2025-09-17T08:17:55.7173154Z 
+2025-09-17T08:17:55.7173558Z       at Object.<anonymous> (test/integration/performance.test.ts:284:15)
+2025-09-17T08:17:55.7174051Z 
+2025-09-17T08:17:55.7879077Z   console.log
+2025-09-17T08:17:55.7879518Z     Scan with count=10: 24.46ms
+2025-09-17T08:17:55.7879819Z 
+2025-09-17T08:17:55.7880234Z       at Object.<anonymous> (test/integration/performance.test.ts:322:19)
+2025-09-17T08:17:55.7881341Z 
+2025-09-17T08:17:55.8324856Z   console.log
+2025-09-17T08:17:55.8325375Z     Scan with count=100: 3.12ms
+2025-09-17T08:17:55.8325709Z 
+2025-09-17T08:17:55.8326063Z       at Object.<anonymous> (test/integration/performance.test.ts:322:19)
+2025-09-17T08:17:55.8326574Z 
+2025-09-17T08:17:55.8656337Z   console.log
+2025-09-17T08:17:55.8656834Z     Scan with count=1000: 0.93ms
+2025-09-17T08:17:55.8657141Z 
+2025-09-17T08:17:55.8658176Z       at Object.<anonymous> (test/integration/performance.test.ts:322:19)
+2025-09-17T08:17:55.8658699Z 
+2025-09-17T08:17:55.8795850Z   console.log
+2025-09-17T08:17:55.8796234Z     50 concurrent operations on same session: 0.96ms
+2025-09-17T08:17:55.8796482Z 
+2025-09-17T08:17:55.8796718Z       at Object.<anonymous> (test/integration/performance.test.ts:380:15)
+2025-09-17T08:17:55.8797153Z 
+2025-09-17T08:17:55.8895414Z   console.log
+2025-09-17T08:17:55.8895765Z     250 mixed concurrent operations: 72859 ops/sec
+2025-09-17T08:17:55.8895996Z 
+2025-09-17T08:17:55.8896285Z       at Object.<anonymous> (test/integration/performance.test.ts:442:15)
+2025-09-17T08:17:55.8896580Z 
+2025-09-17T08:17:55.9006858Z PASS test/integration/performance.test.ts
+2025-09-17T08:17:55.9007437Z   Performance Integration Tests
+2025-09-17T08:17:55.9007860Z     Throughput Tests
+2025-09-17T08:17:55.9008721Z       ✓ should handle high-volume sequential operations (543 ms)
+2025-09-17T08:17:55.9009450Z       ✓ should handle concurrent operations efficiently (45 ms)
+2025-09-17T08:17:55.9009919Z     Memory and Resource Tests
+2025-09-17T08:17:55.9010567Z       ✓ should handle large session data efficiently (6 ms)
+2025-09-17T08:17:55.9011212Z       ✓ should handle many small sessions vs few large sessions (48 ms)
+2025-09-17T08:17:55.9011590Z     Scanning Performance
+2025-09-17T08:17:55.9012022Z       ✓ should handle SCAN operations efficiently with many keys (65 ms)
+2025-09-17T08:17:55.9012506Z       ✓ should handle custom scanCount efficiently (148 ms)
+2025-09-17T08:17:55.9012854Z     Concurrency and Race Conditions
+2025-09-17T08:17:55.9013315Z       ✓ should handle concurrent reads and writes to same session (7 ms)
+2025-09-17T08:17:55.9013861Z       ✓ should handle concurrent operations on different sessions (13 ms)
+2025-09-17T08:17:55.9014543Z     Cleanup and Statistics Performance
+2025-09-17T08:17:55.9015096Z       ○ skipped should perform cleanup operations efficiently - cleanup method removed
+2025-09-17T08:17:55.9015763Z       ○ skipped should generate statistics efficiently - getStats method removed
+2025-09-17T08:17:55.9016077Z 
+2025-09-17T08:18:03.2250477Z   console.log
+2025-09-17T08:18:03.2250778Z     Set 50 sessions in 2.13ms
+2025-09-17T08:18:03.2250960Z 
+2025-09-17T08:18:03.2251231Z       at Object.<anonymous> (test/integration/session-lifecycle.test.ts:450:15)
+2025-09-17T08:18:03.2251548Z 
+2025-09-17T08:18:03.2280695Z   console.log
+2025-09-17T08:18:03.2281155Z     Retrieved 50 sessions in 2.61ms
+2025-09-17T08:18:03.2281475Z 
+2025-09-17T08:18:03.2281948Z       at Object.<anonymous> (test/integration/session-lifecycle.test.ts:466:15)
+2025-09-17T08:18:03.2282544Z 
+2025-09-17T08:18:03.2352844Z PASS test/integration/session-lifecycle.test.ts (7.326 s)
+2025-09-17T08:18:03.2353657Z   Session Lifecycle Integration Tests
+2025-09-17T08:18:03.2354351Z     Basic Session Operations
+2025-09-17T08:18:03.2355192Z       ✓ should handle complete CRUD lifecycle (1010 ms)
+2025-09-17T08:18:03.2355889Z       ✓ should handle sessions without callbacks (4 ms)
+2025-09-17T08:18:03.2356359Z     TTL and Expiration
+2025-09-17T08:18:03.2356921Z       ✓ should respect custom TTL settings (3006 ms)
+2025-09-17T08:18:03.2357706Z       ✓ should respect session cookie maxAge over store TTL (5 ms)
+2025-09-17T08:18:03.2358428Z       ✓ should handle disableTTL option (4 ms)
+2025-09-17T08:18:03.2358891Z     Touch Functionality
+2025-09-17T08:18:03.2359408Z       ✓ should update TTL on touch (2005 ms)
+2025-09-17T08:18:03.2360103Z       ✓ should skip touch when disableTouch is true (1005 ms)
+2025-09-17T08:18:03.2360625Z     Bulk Operations
+2025-09-17T08:18:03.2361836Z       ✓ should handle all() method with real data (7 ms)
+2025-09-17T08:18:03.2362470Z       ✓ should handle clear() method (4 ms)
+2025-09-17T08:18:03.2363061Z       ✓ should handle ids() method (4 ms)
+2025-09-17T08:18:03.2363653Z       ✓ should handle length() method (4 ms)
+2025-09-17T08:18:03.2364086Z     Performance
+2025-09-17T08:18:03.2364823Z       ✓ should handle rapid session operations (10 ms)
+2025-09-17T08:18:03.2365193Z 
+2025-09-17T08:18:05.2256796Z PASS test/integration/error-recovery.test.ts
+2025-09-17T08:18:05.2257229Z   Error Recovery Integration Tests
+2025-09-17T08:18:05.2257505Z     Network Error Handling
+2025-09-17T08:18:05.2258076Z       ✓ should handle real connection failures gracefully (5 ms)
+2025-09-17T08:18:05.2258527Z       ✓ should handle malformed data gracefully (5 ms)
+2025-09-17T08:18:05.2258951Z       ✓ should handle serialization errors gracefully (3 ms)
+2025-09-17T08:18:05.2259256Z     Data Consistency
+2025-09-17T08:18:05.2259604Z       ✓ should handle scan operation failures gracefully (4 ms)
+2025-09-17T08:18:05.2260159Z       ✓ should handle concurrent operations with real connection failures (93 ms)
+2025-09-17T08:18:05.2260547Z     Resource Management
+2025-09-17T08:18:05.2260852Z       ✓ should handle client connection drops (3 ms)
+2025-09-17T08:18:05.2261264Z       ✓ should handle memory pressure scenarios (1418 ms)
+2025-09-17T08:18:05.2261571Z     Error Event Handling
+2025-09-17T08:18:05.2261996Z       ✓ should emit error events for operations without callbacks (103 ms)
+2025-09-17T08:18:05.2262460Z       ✓ should handle multiple error listeners (103 ms)
+2025-09-17T08:18:05.2262747Z     Recovery Scenarios
+2025-09-17T08:18:05.2263125Z       ✓ should handle error scenarios and recovery gracefully (4 ms)
+2025-09-17T08:18:05.2263382Z 
+2025-09-17T08:18:05.9210302Z   console.error
+2025-09-17T08:18:05.9210804Z     ValkeyStore error: ClosingError: 
+2025-09-17T08:18:05.9212017Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:6490:20
+2025-09-17T08:18:05.9213179Z         at Array.forEach (<anonymous>)
+2025-09-17T08:18:05.9214758Z         at GlideClient.close (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:6489:39)
+2025-09-17T08:18:05.9216638Z         at Object.<anonymous> (/home/runner/work/connect-valkey-glide/connect-valkey-glide/test/real-world/multi-server.test.ts:187:20)
+2025-09-17T08:18:05.9217981Z         at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-17T08:18:05.9218528Z 
+2025-09-17T08:18:05.9220030Z     [0m [90m 86 |[39m   [36mprivate[39m handleError(error[33m:[39m [33mError[39m[33m,[39m callback[33m?[39m[33m:[39m (err[33m?[39m[33m:[39m any) [33m=>[39m [36mvoid[39m)[33m:[39m [36mvoid[39m {
+2025-09-17T08:18:05.9221459Z      [90m 87 |[39m     [36mif[39m ([36mthis[39m[33m.[39mlogErrors) {
+2025-09-17T08:18:05.9222589Z     [31m[1m>[22m[39m[90m 88 |[39m       console[33m.[39merror([32m'ValkeyStore error:'[39m[33m,[39m error)[33m;[39m
+2025-09-17T08:18:05.9223624Z      [90m    |[39m               [31m[1m^[22m[39m
+2025-09-17T08:18:05.9224346Z      [90m 89 |[39m     }
+2025-09-17T08:18:05.9224927Z      [90m 90 |[39m     [36mif[39m (callback) {
+2025-09-17T08:18:05.9225595Z      [90m 91 |[39m       callback(error)[33m;[39m[0m
+2025-09-17T08:18:05.9225956Z 
+2025-09-17T08:18:05.9226315Z       at ValkeyStore.error [as handleError] (src/index.ts:88:15)
+2025-09-17T08:18:05.9226968Z       at handleError (src/index.ts:166:18)
+2025-09-17T08:18:05.9227301Z 
+2025-09-17T08:18:05.9263179Z   console.error
+2025-09-17T08:18:05.9263637Z     ValkeyStore error: ClosingError: 
+2025-09-17T08:18:05.9264960Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:6490:20
+2025-09-17T08:18:05.9265647Z         at Array.forEach (<anonymous>)
+2025-09-17T08:18:05.9266432Z         at GlideClient.close (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:6489:39)
+2025-09-17T08:18:05.9267887Z         at Object.<anonymous> (/home/runner/work/connect-valkey-glide/connect-valkey-glide/test/real-world/multi-server.test.ts:187:20)
+2025-09-17T08:18:05.9268641Z         at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-17T08:18:05.9268944Z 
+2025-09-17T08:18:05.9269920Z     [0m [90m 86 |[39m   [36mprivate[39m handleError(error[33m:[39m [33mError[39m[33m,[39m callback[33m?[39m[33m:[39m (err[33m?[39m[33m:[39m any) [33m=>[39m [36mvoid[39m)[33m:[39m [36mvoid[39m {
+2025-09-17T08:18:05.9270739Z      [90m 87 |[39m     [36mif[39m ([36mthis[39m[33m.[39mlogErrors) {
+2025-09-17T08:18:05.9271391Z     [31m[1m>[22m[39m[90m 88 |[39m       console[33m.[39merror([32m'ValkeyStore error:'[39m[33m,[39m error)[33m;[39m
+2025-09-17T08:18:05.9271937Z      [90m    |[39m               [31m[1m^[22m[39m
+2025-09-17T08:18:05.9272250Z      [90m 89 |[39m     }
+2025-09-17T08:18:05.9272562Z      [90m 90 |[39m     [36mif[39m (callback) {
+2025-09-17T08:18:05.9272939Z      [90m 91 |[39m       callback(error)[33m;[39m[0m
+2025-09-17T08:18:05.9273141Z 
+2025-09-17T08:18:05.9273335Z       at ValkeyStore.error [as handleError] (src/index.ts:88:15)
+2025-09-17T08:18:05.9273708Z       at handleError (src/index.ts:166:18)
+2025-09-17T08:18:05.9273900Z 
+2025-09-17T08:18:05.9331214Z   console.error
+2025-09-17T08:18:05.9331535Z     ValkeyStore error: ClosingError: 
+2025-09-17T08:18:05.9332242Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:6490:20
+2025-09-17T08:18:05.9332877Z         at Array.forEach (<anonymous>)
+2025-09-17T08:18:05.9333652Z         at GlideClient.close (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:6489:39)
+2025-09-17T08:18:05.9335212Z         at Object.<anonymous> (/home/runner/work/connect-valkey-glide/connect-valkey-glide/test/real-world/multi-server.test.ts:187:20)
+2025-09-17T08:18:05.9336154Z         at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-17T08:18:05.9336544Z 
+2025-09-17T08:18:05.9337528Z     [0m [90m 86 |[39m   [36mprivate[39m handleError(error[33m:[39m [33mError[39m[33m,[39m callback[33m?[39m[33m:[39m (err[33m?[39m[33m:[39m any) [33m=>[39m [36mvoid[39m)[33m:[39m [36mvoid[39m {
+2025-09-17T08:18:05.9338537Z      [90m 87 |[39m     [36mif[39m ([36mthis[39m[33m.[39mlogErrors) {
+2025-09-17T08:18:05.9339343Z     [31m[1m>[22m[39m[90m 88 |[39m       console[33m.[39merror([32m'ValkeyStore error:'[39m[33m,[39m error)[33m;[39m
+2025-09-17T08:18:05.9340004Z      [90m    |[39m               [31m[1m^[22m[39m
+2025-09-17T08:18:05.9340378Z      [90m 89 |[39m     }
+2025-09-17T08:18:05.9340760Z      [90m 90 |[39m     [36mif[39m (callback) {
+2025-09-17T08:18:05.9341234Z      [90m 91 |[39m       callback(error)[33m;[39m[0m
+2025-09-17T08:18:05.9341483Z 
+2025-09-17T08:18:05.9341724Z       at ValkeyStore.error [as handleError] (src/index.ts:88:15)
+2025-09-17T08:18:05.9342181Z       at handleError (src/index.ts:166:18)
+2025-09-17T08:18:05.9342408Z 
+2025-09-17T08:18:05.9366974Z   console.error
+2025-09-17T08:18:05.9367464Z     ValkeyStore error: ClosingError: 
+2025-09-17T08:18:05.9368750Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:6490:20
+2025-09-17T08:18:05.9369953Z         at Array.forEach (<anonymous>)
+2025-09-17T08:18:05.9371334Z         at GlideClient.close (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:6489:39)
+2025-09-17T08:18:05.9373304Z         at Object.<anonymous> (/home/runner/work/connect-valkey-glide/connect-valkey-glide/test/real-world/multi-server.test.ts:187:20)
+2025-09-17T08:18:05.9375362Z         at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-17T08:18:05.9375932Z 
+2025-09-17T08:18:05.9377331Z     [0m [90m 86 |[39m   [36mprivate[39m handleError(error[33m:[39m [33mError[39m[33m,[39m callback[33m?[39m[33m:[39m (err[33m?[39m[33m:[39m any) [33m=>[39m [36mvoid[39m)[33m:[39m [36mvoid[39m {
+2025-09-17T08:18:05.9378769Z      [90m 87 |[39m     [36mif[39m ([36mthis[39m[33m.[39mlogErrors) {
+2025-09-17T08:18:05.9380179Z     [31m[1m>[22m[39m[90m 88 |[39m       console[33m.[39merror([32m'ValkeyStore error:'[39m[33m,[39m error)[33m;[39m
+2025-09-17T08:18:05.9381175Z      [90m    |[39m               [31m[1m^[22m[39m
+2025-09-17T08:18:05.9381723Z      [90m 89 |[39m     }
+2025-09-17T08:18:05.9382279Z      [90m 90 |[39m     [36mif[39m (callback) {
+2025-09-17T08:18:05.9382970Z      [90m 91 |[39m       callback(error)[33m;[39m[0m
+2025-09-17T08:18:05.9383320Z 
+2025-09-17T08:18:05.9383662Z       at ValkeyStore.error [as handleError] (src/index.ts:88:15)
+2025-09-17T08:18:05.9384561Z       at handleError (src/index.ts:213:16)
+2025-09-17T08:18:05.9384897Z 
+2025-09-17T08:18:05.9403399Z   console.error
+2025-09-17T08:18:05.9404079Z     ValkeyStore error: ClosingError: 
+2025-09-17T08:18:05.9405582Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:6490:20
+2025-09-17T08:18:05.9406728Z         at Array.forEach (<anonymous>)
+2025-09-17T08:18:05.9408179Z         at GlideClient.close (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:6489:39)
+2025-09-17T08:18:05.9410130Z         at Object.<anonymous> (/home/runner/work/connect-valkey-glide/connect-valkey-glide/test/real-world/multi-server.test.ts:187:20)
+2025-09-17T08:18:05.9411490Z         at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-17T08:18:05.9412031Z 
+2025-09-17T08:18:05.9413416Z     [0m [90m 86 |[39m   [36mprivate[39m handleError(error[33m:[39m [33mError[39m[33m,[39m callback[33m?[39m[33m:[39m (err[33m?[39m[33m:[39m any) [33m=>[39m [36mvoid[39m)[33m:[39m [36mvoid[39m {
+2025-09-17T08:18:05.9415353Z      [90m 87 |[39m     [36mif[39m ([36mthis[39m[33m.[39mlogErrors) {
+2025-09-17T08:18:05.9416538Z     [31m[1m>[22m[39m[90m 88 |[39m       console[33m.[39merror([32m'ValkeyStore error:'[39m[33m,[39m error)[33m;[39m
+2025-09-17T08:18:05.9417510Z      [90m    |[39m               [31m[1m^[22m[39m
+2025-09-17T08:18:05.9418108Z      [90m 89 |[39m     }
+2025-09-17T08:18:05.9418659Z      [90m 90 |[39m     [36mif[39m (callback) {
+2025-09-17T08:18:05.9419348Z      [90m 91 |[39m       callback(error)[33m;[39m[0m
+2025-09-17T08:18:05.9419702Z 
+2025-09-17T08:18:05.9420056Z       at ValkeyStore.error [as handleError] (src/index.ts:88:15)
+2025-09-17T08:18:05.9420703Z       at handleError (src/index.ts:213:16)
+2025-09-17T08:18:05.9421192Z 
+2025-09-17T08:18:05.9434745Z   console.error
+2025-09-17T08:18:05.9435242Z     ValkeyStore error: ClosingError: 
+2025-09-17T08:18:05.9436558Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:6490:20
+2025-09-17T08:18:05.9437733Z         at Array.forEach (<anonymous>)
+2025-09-17T08:18:05.9439096Z         at GlideClient.close (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:6489:39)
+2025-09-17T08:18:05.9441048Z         at Object.<anonymous> (/home/runner/work/connect-valkey-glide/connect-valkey-glide/test/real-world/multi-server.test.ts:187:20)
+2025-09-17T08:18:05.9442404Z         at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-17T08:18:05.9442953Z 
+2025-09-17T08:18:05.9444598Z     [0m [90m 86 |[39m   [36mprivate[39m handleError(error[33m:[39m [33mError[39m[33m,[39m callback[33m?[39m[33m:[39m (err[33m?[39m[33m:[39m any) [33m=>[39m [36mvoid[39m)[33m:[39m [36mvoid[39m {
+2025-09-17T08:18:05.9446496Z      [90m 87 |[39m     [36mif[39m ([36mthis[39m[33m.[39mlogErrors) {
+2025-09-17T08:18:05.9447702Z     [31m[1m>[22m[39m[90m 88 |[39m       console[33m.[39merror([32m'ValkeyStore error:'[39m[33m,[39m error)[33m;[39m
+2025-09-17T08:18:05.9448652Z      [90m    |[39m               [31m[1m^[22m[39m
+2025-09-17T08:18:05.9449178Z      [90m 89 |[39m     }
+2025-09-17T08:18:05.9449732Z      [90m 90 |[39m     [36mif[39m (callback) {
+2025-09-17T08:18:05.9450592Z      [90m 91 |[39m       callback(error)[33m;[39m[0m
+2025-09-17T08:18:05.9450955Z 
+2025-09-17T08:18:05.9451316Z       at ValkeyStore.error [as handleError] (src/index.ts:88:15)
+2025-09-17T08:18:05.9451974Z       at handleError (src/index.ts:213:16)
+2025-09-17T08:18:05.9452299Z 
+2025-09-17T08:18:05.9466422Z   console.error
+2025-09-17T08:18:05.9466856Z     ValkeyStore error: ClosingError: 
+2025-09-17T08:18:05.9467753Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:6490:20
+2025-09-17T08:18:05.9468417Z         at Array.forEach (<anonymous>)
+2025-09-17T08:18:05.9469208Z         at GlideClient.close (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:6489:39)
+2025-09-17T08:18:05.9470286Z         at Object.<anonymous> (/home/runner/work/connect-valkey-glide/connect-valkey-glide/test/real-world/multi-server.test.ts:187:20)
+2025-09-17T08:18:05.9471089Z         at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-17T08:18:05.9471413Z 
+2025-09-17T08:18:05.9472189Z     [0m [90m 86 |[39m   [36mprivate[39m handleError(error[33m:[39m [33mError[39m[33m,[39m callback[33m?[39m[33m:[39m (err[33m?[39m[33m:[39m any) [33m=>[39m [36mvoid[39m)[33m:[39m [36mvoid[39m {
+2025-09-17T08:18:05.9472983Z      [90m 87 |[39m     [36mif[39m ([36mthis[39m[33m.[39mlogErrors) {
+2025-09-17T08:18:05.9473647Z     [31m[1m>[22m[39m[90m 88 |[39m       console[33m.[39merror([32m'ValkeyStore error:'[39m[33m,[39m error)[33m;[39m
+2025-09-17T08:18:05.9474419Z      [90m    |[39m               [31m[1m^[22m[39m
+2025-09-17T08:18:05.9474753Z      [90m 89 |[39m     }
+2025-09-17T08:18:05.9475060Z      [90m 90 |[39m     [36mif[39m (callback) {
+2025-09-17T08:18:05.9475438Z      [90m 91 |[39m       callback(error)[33m;[39m[0m
+2025-09-17T08:18:05.9475645Z 
+2025-09-17T08:18:05.9475845Z       at ValkeyStore.error [as handleError] (src/index.ts:88:15)
+2025-09-17T08:18:05.9476211Z       at handleError (src/index.ts:166:18)
+2025-09-17T08:18:05.9476392Z 
+2025-09-17T08:18:05.9615055Z   console.error
+2025-09-17T08:18:05.9615812Z     ValkeyStore error: ClosingError: Unable to execute requests; the client is closed. Please create a new client.
+2025-09-17T08:18:05.9616922Z         at GlideClient.ensureClientIsOpen (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:445:19)
+2025-09-17T08:18:05.9618236Z         at GlideClient.createWritePromise (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:461:14)
+2025-09-17T08:18:05.9619470Z         at GlideClient.expire (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:2836:21)
+2025-09-17T08:18:05.9620382Z         at expire (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:210:19)
+2025-09-17T08:18:05.9621042Z         at fn (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:34:3)
+2025-09-17T08:18:05.9621802Z         at ValkeyStore.optionalCb [as touch] (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:217:12)
+2025-09-17T08:18:05.9622761Z         at ServerResponse.end (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/express-session/index.js:355:15)
+2025-09-17T08:18:05.9623785Z         at ServerResponse.send (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/express/lib/response.js:219:10)
+2025-09-17T08:18:05.9625386Z         at ServerResponse.json (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/express/lib/response.js:250:15)
+2025-09-17T08:18:05.9626304Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/test/real-world/multi-server.test.ts:138:34
+2025-09-17T08:18:05.9627315Z         at ValkeyStore.callback [as handleError] (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:91:7)
+2025-09-17T08:18:05.9628134Z         at handleError (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:166:18)
+2025-09-17T08:18:05.9628759Z         at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-17T08:18:05.9629058Z 
+2025-09-17T08:18:05.9629877Z     [0m [90m 86 |[39m   [36mprivate[39m handleError(error[33m:[39m [33mError[39m[33m,[39m callback[33m?[39m[33m:[39m (err[33m?[39m[33m:[39m any) [33m=>[39m [36mvoid[39m)[33m:[39m [36mvoid[39m {
+2025-09-17T08:18:05.9630686Z      [90m 87 |[39m     [36mif[39m ([36mthis[39m[33m.[39mlogErrors) {
+2025-09-17T08:18:05.9631325Z     [31m[1m>[22m[39m[90m 88 |[39m       console[33m.[39merror([32m'ValkeyStore error:'[39m[33m,[39m error)[33m;[39m
+2025-09-17T08:18:05.9631854Z      [90m    |[39m               [31m[1m^[22m[39m
+2025-09-17T08:18:05.9632162Z      [90m 89 |[39m     }
+2025-09-17T08:18:05.9632478Z      [90m 90 |[39m     [36mif[39m (callback) {
+2025-09-17T08:18:05.9632868Z      [90m 91 |[39m       callback(error)[33m;[39m[0m
+2025-09-17T08:18:05.9633078Z 
+2025-09-17T08:18:05.9633267Z       at ValkeyStore.error [as handleError] (src/index.ts:88:15)
+2025-09-17T08:18:05.9633634Z       at handleError (src/index.ts:213:16)
+2025-09-17T08:18:05.9633822Z 
+2025-09-17T08:18:05.9641599Z   console.error
+2025-09-17T08:18:05.9642431Z     ValkeyStore error: ClosingError: Unable to execute requests; the client is closed. Please create a new client.
+2025-09-17T08:18:05.9643532Z         at GlideClient.ensureClientIsOpen (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:445:19)
+2025-09-17T08:18:05.9645043Z         at GlideClient.createWritePromise (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:461:14)
+2025-09-17T08:18:05.9646306Z         at GlideClient.expire (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:2836:21)
+2025-09-17T08:18:05.9647216Z         at expire (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:210:19)
+2025-09-17T08:18:05.9647869Z         at fn (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:34:3)
+2025-09-17T08:18:05.9649158Z         at ValkeyStore.optionalCb [as touch] (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:217:12)
+2025-09-17T08:18:05.9650968Z         at ServerResponse.end (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/express-session/index.js:355:15)
+2025-09-17T08:18:05.9652616Z         at ServerResponse.send (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/express/lib/response.js:219:10)
+2025-09-17T08:18:05.9653634Z         at ServerResponse.json (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/express/lib/response.js:250:15)
+2025-09-17T08:18:05.9654845Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/test/real-world/multi-server.test.ts:138:34
+2025-09-17T08:18:05.9655724Z         at ValkeyStore.callback [as handleError] (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:91:7)
+2025-09-17T08:18:05.9656531Z         at handleError (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:166:18)
+2025-09-17T08:18:05.9657160Z         at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-17T08:18:05.9657704Z 
+2025-09-17T08:18:05.9658484Z     [0m [90m 86 |[39m   [36mprivate[39m handleError(error[33m:[39m [33mError[39m[33m,[39m callback[33m?[39m[33m:[39m (err[33m?[39m[33m:[39m any) [33m=>[39m [36mvoid[39m)[33m:[39m [36mvoid[39m {
+2025-09-17T08:18:05.9659271Z      [90m 87 |[39m     [36mif[39m ([36mthis[39m[33m.[39mlogErrors) {
+2025-09-17T08:18:05.9660035Z     [31m[1m>[22m[39m[90m 88 |[39m       console[33m.[39merror([32m'ValkeyStore error:'[39m[33m,[39m error)[33m;[39m
+2025-09-17T08:18:05.9660570Z      [90m    |[39m               [31m[1m^[22m[39m
+2025-09-17T08:18:05.9660867Z      [90m 89 |[39m     }
+2025-09-17T08:18:05.9661168Z      [90m 90 |[39m     [36mif[39m (callback) {
+2025-09-17T08:18:05.9661539Z      [90m 91 |[39m       callback(error)[33m;[39m[0m
+2025-09-17T08:18:05.9661736Z 
+2025-09-17T08:18:05.9661929Z       at ValkeyStore.error [as handleError] (src/index.ts:88:15)
+2025-09-17T08:18:05.9662299Z       at handleError (src/index.ts:213:16)
+2025-09-17T08:18:05.9662480Z 
+2025-09-17T08:18:05.9672333Z   console.error
+2025-09-17T08:18:05.9673153Z     ValkeyStore error: ClosingError: Unable to execute requests; the client is closed. Please create a new client.
+2025-09-17T08:18:05.9674459Z         at GlideClient.ensureClientIsOpen (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:445:19)
+2025-09-17T08:18:05.9675798Z         at GlideClient.createWritePromise (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:461:14)
+2025-09-17T08:18:05.9677022Z         at GlideClient.expire (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:2836:21)
+2025-09-17T08:18:05.9677933Z         at expire (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:210:19)
+2025-09-17T08:18:05.9678586Z         at fn (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:34:3)
+2025-09-17T08:18:05.9679345Z         at ValkeyStore.optionalCb [as touch] (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:217:12)
+2025-09-17T08:18:05.9680290Z         at ServerResponse.end (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/express-session/index.js:355:15)
+2025-09-17T08:18:05.9681321Z         at ServerResponse.send (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/express/lib/response.js:219:10)
+2025-09-17T08:18:05.9682340Z         at ServerResponse.json (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/express/lib/response.js:250:15)
+2025-09-17T08:18:05.9683238Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/test/real-world/multi-server.test.ts:138:34
+2025-09-17T08:18:05.9684100Z         at ValkeyStore.callback [as handleError] (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:91:7)
+2025-09-17T08:18:05.9685014Z         at handleError (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:166:18)
+2025-09-17T08:18:05.9685641Z         at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-17T08:18:05.9685940Z 
+2025-09-17T08:18:05.9686716Z     [0m [90m 86 |[39m   [36mprivate[39m handleError(error[33m:[39m [33mError[39m[33m,[39m callback[33m?[39m[33m:[39m (err[33m?[39m[33m:[39m any) [33m=>[39m [36mvoid[39m)[33m:[39m [36mvoid[39m {
+2025-09-17T08:18:05.9687499Z      [90m 87 |[39m     [36mif[39m ([36mthis[39m[33m.[39mlogErrors) {
+2025-09-17T08:18:05.9688133Z     [31m[1m>[22m[39m[90m 88 |[39m       console[33m.[39merror([32m'ValkeyStore error:'[39m[33m,[39m error)[33m;[39m
+2025-09-17T08:18:05.9688657Z      [90m    |[39m               [31m[1m^[22m[39m
+2025-09-17T08:18:05.9688964Z      [90m 89 |[39m     }
+2025-09-17T08:18:05.9689269Z      [90m 90 |[39m     [36mif[39m (callback) {
+2025-09-17T08:18:05.9689829Z      [90m 91 |[39m       callback(error)[33m;[39m[0m
+2025-09-17T08:18:05.9690030Z 
+2025-09-17T08:18:05.9690216Z       at ValkeyStore.error [as handleError] (src/index.ts:88:15)
+2025-09-17T08:18:05.9690584Z       at handleError (src/index.ts:213:16)
+2025-09-17T08:18:05.9690768Z 
+2025-09-17T08:18:05.9698060Z   console.error
+2025-09-17T08:18:05.9698860Z     ValkeyStore error: ClosingError: Unable to execute requests; the client is closed. Please create a new client.
+2025-09-17T08:18:05.9700113Z         at GlideClient.ensureClientIsOpen (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:445:19)
+2025-09-17T08:18:05.9701399Z         at GlideClient.createWritePromise (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:461:14)
+2025-09-17T08:18:05.9702600Z         at GlideClient.expire (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:2836:21)
+2025-09-17T08:18:05.9703500Z         at expire (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:210:19)
+2025-09-17T08:18:05.9704378Z         at fn (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:34:3)
+2025-09-17T08:18:05.9705178Z         at ValkeyStore.optionalCb [as touch] (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:217:12)
+2025-09-17T08:18:05.9706124Z         at ServerResponse.end (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/express-session/index.js:355:15)
+2025-09-17T08:18:05.9707153Z         at ServerResponse.send (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/express/lib/response.js:219:10)
+2025-09-17T08:18:05.9708132Z         at ServerResponse.json (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/express/lib/response.js:250:15)
+2025-09-17T08:18:05.9709040Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/test/real-world/multi-server.test.ts:138:34
+2025-09-17T08:18:05.9709929Z         at ValkeyStore.callback [as handleError] (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:91:7)
+2025-09-17T08:18:05.9710748Z         at handleError (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:166:18)
+2025-09-17T08:18:05.9711383Z         at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-17T08:18:05.9711683Z 
+2025-09-17T08:18:05.9712436Z     [0m [90m 86 |[39m   [36mprivate[39m handleError(error[33m:[39m [33mError[39m[33m,[39m callback[33m?[39m[33m:[39m (err[33m?[39m[33m:[39m any) [33m=>[39m [36mvoid[39m)[33m:[39m [36mvoid[39m {
+2025-09-17T08:18:05.9713218Z      [90m 87 |[39m     [36mif[39m ([36mthis[39m[33m.[39mlogErrors) {
+2025-09-17T08:18:05.9713873Z     [31m[1m>[22m[39m[90m 88 |[39m       console[33m.[39merror([32m'ValkeyStore error:'[39m[33m,[39m error)[33m;[39m
+2025-09-17T08:18:05.9714676Z      [90m    |[39m               [31m[1m^[22m[39m
+2025-09-17T08:18:05.9714987Z      [90m 89 |[39m     }
+2025-09-17T08:18:05.9715291Z      [90m 90 |[39m     [36mif[39m (callback) {
+2025-09-17T08:18:05.9715660Z      [90m 91 |[39m       callback(error)[33m;[39m[0m
+2025-09-17T08:18:05.9715864Z 
+2025-09-17T08:18:05.9716054Z       at ValkeyStore.error [as handleError] (src/index.ts:88:15)
+2025-09-17T08:18:05.9716418Z       at handleError (src/index.ts:213:16)
+2025-09-17T08:18:05.9716610Z 
+2025-09-17T08:18:05.9748862Z   console.error
+2025-09-17T08:18:05.9749648Z     ValkeyStore error: ClosingError: Unable to execute requests; the client is closed. Please create a new client.
+2025-09-17T08:18:05.9750742Z         at GlideClient.ensureClientIsOpen (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:445:19)
+2025-09-17T08:18:05.9752050Z         at GlideClient.createWritePromise (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:461:14)
+2025-09-17T08:18:05.9754481Z         at GlideClient.get (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:734:21)
+2025-09-17T08:18:05.9755934Z         at get (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:106:19)
+2025-09-17T08:18:05.9757261Z         at fn (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:34:3)
+2025-09-17T08:18:05.9758619Z         at ValkeyStore.optionalCb [as get] (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:132:12)
+2025-09-17T08:18:05.9760309Z         at session (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/express-session/index.js:493:11)
+2025-09-17T08:18:05.9761479Z         at Layer.handleRequest (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/lib/layer.js:152:17)
+2025-09-17T08:18:05.9762401Z         at trimPrefix (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:342:13)
+2025-09-17T08:18:05.9763196Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:297:9
+2025-09-17T08:18:05.9764010Z         at processParams (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:582:12)
+2025-09-17T08:18:05.9765178Z         at next (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:291:5)
+2025-09-17T08:18:05.9765986Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/body-parser/lib/read.js:132:5
+2025-09-17T08:18:05.9766646Z         at AsyncResource.runInAsyncScope (node:async_hooks:206:9)
+2025-09-17T08:18:05.9767340Z         at invokeCallback (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/raw-body/index.js:238:16)
+2025-09-17T08:18:05.9768408Z         at done (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/raw-body/index.js:227:7)
+2025-09-17T08:18:05.9769896Z         at IncomingMessage.onEnd (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/raw-body/index.js:287:7)
+2025-09-17T08:18:05.9770677Z         at IncomingMessage.emit (node:events:524:28)
+2025-09-17T08:18:05.9771075Z         at endReadableNT (node:internal/streams/readable:1698:12)
+2025-09-17T08:18:05.9771567Z         at processTicksAndRejections (node:internal/process/task_queues:82:21)
+2025-09-17T08:18:05.9771876Z 
+2025-09-17T08:18:05.9772654Z     [0m [90m 86 |[39m   [36mprivate[39m handleError(error[33m:[39m [33mError[39m[33m,[39m callback[33m?[39m[33m:[39m (err[33m?[39m[33m:[39m any) [33m=>[39m [36mvoid[39m)[33m:[39m [36mvoid[39m {
+2025-09-17T08:18:05.9773430Z      [90m 87 |[39m     [36mif[39m ([36mthis[39m[33m.[39mlogErrors) {
+2025-09-17T08:18:05.9774074Z     [31m[1m>[22m[39m[90m 88 |[39m       console[33m.[39merror([32m'ValkeyStore error:'[39m[33m,[39m error)[33m;[39m
+2025-09-17T08:18:05.9774843Z      [90m    |[39m               [31m[1m^[22m[39m
+2025-09-17T08:18:05.9775146Z      [90m 89 |[39m     }
+2025-09-17T08:18:05.9775456Z      [90m 90 |[39m     [36mif[39m (callback) {
+2025-09-17T08:18:05.9775818Z      [90m 91 |[39m       callback(error)[33m;[39m[0m
+2025-09-17T08:18:05.9776019Z 
+2025-09-17T08:18:05.9776205Z       at ValkeyStore.error [as handleError] (src/index.ts:88:15)
+2025-09-17T08:18:05.9776572Z       at handleError (src/index.ts:128:16)
+2025-09-17T08:18:05.9776758Z 
+2025-09-17T08:18:05.9783086Z   console.error
+2025-09-17T08:18:05.9783971Z     ValkeyStore error: ClosingError: Unable to execute requests; the client is closed. Please create a new client.
+2025-09-17T08:18:05.9785279Z         at GlideClient.ensureClientIsOpen (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:445:19)
+2025-09-17T08:18:05.9786575Z         at GlideClient.createWritePromise (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:461:14)
+2025-09-17T08:18:05.9787990Z         at GlideClient.get (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:734:21)
+2025-09-17T08:18:05.9788851Z         at get (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:106:19)
+2025-09-17T08:18:05.9789588Z         at fn (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:34:3)
+2025-09-17T08:18:05.9790336Z         at ValkeyStore.optionalCb [as get] (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:132:12)
+2025-09-17T08:18:05.9791214Z         at session (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/express-session/index.js:493:11)
+2025-09-17T08:18:05.9792154Z         at Layer.handleRequest (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/lib/layer.js:152:17)
+2025-09-17T08:18:05.9793056Z         at trimPrefix (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:342:13)
+2025-09-17T08:18:05.9793843Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:297:9
+2025-09-17T08:18:05.9794875Z         at processParams (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:582:12)
+2025-09-17T08:18:05.9795716Z         at next (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:291:5)
+2025-09-17T08:18:05.9796509Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/body-parser/lib/read.js:132:5
+2025-09-17T08:18:05.9797127Z         at AsyncResource.runInAsyncScope (node:async_hooks:206:9)
+2025-09-17T08:18:05.9797814Z         at invokeCallback (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/raw-body/index.js:238:16)
+2025-09-17T08:18:05.9798648Z         at done (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/raw-body/index.js:227:7)
+2025-09-17T08:18:05.9799533Z         at IncomingMessage.onEnd (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/raw-body/index.js:287:7)
+2025-09-17T08:18:05.9800171Z         at IncomingMessage.emit (node:events:524:28)
+2025-09-17T08:18:05.9800554Z         at endReadableNT (node:internal/streams/readable:1698:12)
+2025-09-17T08:18:05.9801045Z         at processTicksAndRejections (node:internal/process/task_queues:82:21)
+2025-09-17T08:18:05.9801345Z 
+2025-09-17T08:18:05.9802095Z     [0m [90m 86 |[39m   [36mprivate[39m handleError(error[33m:[39m [33mError[39m[33m,[39m callback[33m?[39m[33m:[39m (err[33m?[39m[33m:[39m any) [33m=>[39m [36mvoid[39m)[33m:[39m [36mvoid[39m {
+2025-09-17T08:18:05.9803225Z      [90m 87 |[39m     [36mif[39m ([36mthis[39m[33m.[39mlogErrors) {
+2025-09-17T08:18:05.9804441Z     [31m[1m>[22m[39m[90m 88 |[39m       console[33m.[39merror([32m'ValkeyStore error:'[39m[33m,[39m error)[33m;[39m
+2025-09-17T08:18:05.9805333Z      [90m    |[39m               [31m[1m^[22m[39m
+2025-09-17T08:18:05.9805778Z      [90m 89 |[39m     }
+2025-09-17T08:18:05.9806251Z      [90m 90 |[39m     [36mif[39m (callback) {
+2025-09-17T08:18:05.9806840Z      [90m 91 |[39m       callback(error)[33m;[39m[0m
+2025-09-17T08:18:05.9807183Z 
+2025-09-17T08:18:05.9807500Z       at ValkeyStore.error [as handleError] (src/index.ts:88:15)
+2025-09-17T08:18:05.9808112Z       at handleError (src/index.ts:128:16)
+2025-09-17T08:18:05.9808403Z 
+2025-09-17T08:18:05.9829332Z   console.error
+2025-09-17T08:18:05.9830209Z     ValkeyStore error: ClosingError: Unable to execute requests; the client is closed. Please create a new client.
+2025-09-17T08:18:05.9831303Z         at GlideClient.ensureClientIsOpen (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:445:19)
+2025-09-17T08:18:05.9832588Z         at GlideClient.createWritePromise (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:461:14)
+2025-09-17T08:18:05.9834525Z         at GlideClient.get (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:734:21)
+2025-09-17T08:18:05.9835412Z         at get (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:106:19)
+2025-09-17T08:18:05.9836181Z         at fn (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:34:3)
+2025-09-17T08:18:05.9836939Z         at ValkeyStore.optionalCb [as get] (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:132:12)
+2025-09-17T08:18:05.9837835Z         at session (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/express-session/index.js:493:11)
+2025-09-17T08:18:05.9838767Z         at Layer.handleRequest (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/lib/layer.js:152:17)
+2025-09-17T08:18:05.9839668Z         at trimPrefix (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:342:13)
+2025-09-17T08:18:05.9840453Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:297:9
+2025-09-17T08:18:05.9841264Z         at processParams (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:582:12)
+2025-09-17T08:18:05.9842091Z         at next (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:291:5)
+2025-09-17T08:18:05.9842882Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/body-parser/lib/read.js:132:5
+2025-09-17T08:18:05.9843495Z         at AsyncResource.runInAsyncScope (node:async_hooks:206:9)
+2025-09-17T08:18:05.9844412Z         at invokeCallback (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/raw-body/index.js:238:16)
+2025-09-17T08:18:05.9845260Z         at done (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/raw-body/index.js:227:7)
+2025-09-17T08:18:05.9846132Z         at IncomingMessage.onEnd (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/raw-body/index.js:287:7)
+2025-09-17T08:18:05.9846768Z         at IncomingMessage.emit (node:events:524:28)
+2025-09-17T08:18:05.9847152Z         at endReadableNT (node:internal/streams/readable:1698:12)
+2025-09-17T08:18:05.9847645Z         at processTicksAndRejections (node:internal/process/task_queues:82:21)
+2025-09-17T08:18:05.9847945Z 
+2025-09-17T08:18:05.9848713Z     [0m [90m 86 |[39m   [36mprivate[39m handleError(error[33m:[39m [33mError[39m[33m,[39m callback[33m?[39m[33m:[39m (err[33m?[39m[33m:[39m any) [33m=>[39m [36mvoid[39m)[33m:[39m [36mvoid[39m {
+2025-09-17T08:18:05.9849810Z      [90m 87 |[39m     [36mif[39m ([36mthis[39m[33m.[39mlogErrors) {
+2025-09-17T08:18:05.9850475Z     [31m[1m>[22m[39m[90m 88 |[39m       console[33m.[39merror([32m'ValkeyStore error:'[39m[33m,[39m error)[33m;[39m
+2025-09-17T08:18:05.9851037Z      [90m    |[39m               [31m[1m^[22m[39m
+2025-09-17T08:18:05.9851336Z      [90m 89 |[39m     }
+2025-09-17T08:18:05.9851636Z      [90m 90 |[39m     [36mif[39m (callback) {
+2025-09-17T08:18:05.9852005Z      [90m 91 |[39m       callback(error)[33m;[39m[0m
+2025-09-17T08:18:05.9852205Z 
+2025-09-17T08:18:05.9852397Z       at ValkeyStore.error [as handleError] (src/index.ts:88:15)
+2025-09-17T08:18:05.9852762Z       at handleError (src/index.ts:128:16)
+2025-09-17T08:18:05.9852949Z 
+2025-09-17T08:18:05.9888492Z   console.error
+2025-09-17T08:18:05.9889353Z     ValkeyStore error: ClosingError: Unable to execute requests; the client is closed. Please create a new client.
+2025-09-17T08:18:05.9890450Z         at GlideClient.ensureClientIsOpen (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:445:19)
+2025-09-17T08:18:05.9891981Z         at GlideClient.createWritePromise (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:461:14)
+2025-09-17T08:18:05.9893173Z         at GlideClient.get (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:734:21)
+2025-09-17T08:18:05.9894031Z         at get (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:106:19)
+2025-09-17T08:18:05.9895062Z         at fn (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:34:3)
+2025-09-17T08:18:05.9895820Z         at ValkeyStore.optionalCb [as get] (/home/runner/work/connect-valkey-glide/connect-valkey-glide/src/index.ts:132:12)
+2025-09-17T08:18:05.9896701Z         at session (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/express-session/index.js:493:11)
+2025-09-17T08:18:05.9897637Z         at Layer.handleRequest (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/lib/layer.js:152:17)
+2025-09-17T08:18:05.9898550Z         at trimPrefix (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:342:13)
+2025-09-17T08:18:05.9899493Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:297:9
+2025-09-17T08:18:05.9900664Z         at processParams (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:582:12)
+2025-09-17T08:18:05.9902110Z         at next (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/router/index.js:291:5)
+2025-09-17T08:18:05.9903652Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/body-parser/lib/read.js:132:5
+2025-09-17T08:18:05.9904757Z         at AsyncResource.runInAsyncScope (node:async_hooks:206:9)
+2025-09-17T08:18:05.9905458Z         at invokeCallback (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/raw-body/index.js:238:16)
+2025-09-17T08:18:05.9906783Z         at done (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/raw-body/index.js:227:7)
+2025-09-17T08:18:05.9908303Z         at IncomingMessage.onEnd (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/raw-body/index.js:287:7)
+2025-09-17T08:18:05.9909438Z         at IncomingMessage.emit (node:events:524:28)
+2025-09-17T08:18:05.9910137Z         at endReadableNT (node:internal/streams/readable:1698:12)
+2025-09-17T08:18:05.9910953Z         at processTicksAndRejections (node:internal/process/task_queues:82:21)
+2025-09-17T08:18:05.9911483Z 
+2025-09-17T08:18:05.9914374Z     [0m [90m 86 |[39m   [36mprivate[39m handleError(error[33m:[39m [33mError[39m[33m,[39m callback[33m?[39m[33m:[39m (err[33m?[39m[33m:[39m any) [33m=>[39m [36mvoid[39m)[33m:[39m [36mvoid[39m {
+2025-09-17T08:18:05.9917280Z      [90m 87 |[39m     [36mif[39m ([36mthis[39m[33m.[39mlogErrors) {
+2025-09-17T08:18:05.9919278Z     [31m[1m>[22m[39m[90m 88 |[39m       console[33m.[39merror([32m'ValkeyStore error:'[39m[33m,[39m error)[33m;[39m
+2025-09-17T08:18:05.9920936Z      [90m    |[39m               [31m[1m^[22m[39m
+2025-09-17T08:18:05.9921752Z      [90m 89 |[39m     }
+2025-09-17T08:18:05.9922800Z      [90m 90 |[39m     [36mif[39m (callback) {
+2025-09-17T08:18:05.9927576Z      [90m 91 |[39m       callback(error)[33m;[39m[0m
+2025-09-17T08:18:05.9927959Z 
+2025-09-17T08:18:05.9928326Z       at ValkeyStore.error [as handleError] (src/index.ts:88:15)
+2025-09-17T08:18:05.9929012Z       at handleError (src/index.ts:128:16)
+2025-09-17T08:18:05.9929359Z 
+2025-09-17T08:18:06.0340085Z FAIL test/real-world/multi-server.test.ts
+2025-09-17T08:18:06.0340962Z   Multi-Server Session Sharing
+2025-09-17T08:18:06.0341387Z     Standalone Mode
+2025-09-17T08:18:06.0342032Z       ✓ should share sessions across all servers (53 ms)
+2025-09-17T08:18:06.0342675Z       ✓ should propagate session modifications across servers (32 ms)
+2025-09-17T08:18:06.0343696Z       ✓ should handle shopping cart across servers (41 ms)
+2025-09-17T08:18:06.0344579Z       ✓ should handle session destruction across servers (48 ms)
+2025-09-17T08:18:06.0345178Z       ✓ should handle concurrent modifications correctly (39 ms)
+2025-09-17T08:18:06.0345746Z       ✕ should maintain session integrity under load (114 ms)
+2025-09-17T08:18:06.0346135Z     Cluster Mode
+2025-09-17T08:18:06.0346526Z       ✓ should share sessions across servers in cluster mode (52 ms)
+2025-09-17T08:18:06.0346941Z 
+2025-09-17T08:18:06.0347357Z   ● Multi-Server Session Sharing › Standalone Mode › should maintain session integrity under load
+2025-09-17T08:18:06.0347722Z 
+2025-09-17T08:18:06.0347814Z     read ECONNRESET
+2025-09-17T08:18:06.0347935Z 
+2025-09-17T08:18:06.0347940Z 
+2025-09-17T08:18:10.7858481Z   console.error
+2025-09-17T08:18:10.7858975Z     ValkeyStore error: ClosingError: 
+2025-09-17T08:18:10.7859711Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:6490:20
+2025-09-17T08:18:10.7860374Z         at Array.forEach (<anonymous>)
+2025-09-17T08:18:10.7861150Z         at GlideClient.close (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:6489:39)
+2025-09-17T08:18:10.7862223Z         at Object.<anonymous> (/home/runner/work/connect-valkey-glide/connect-valkey-glide/test/real-world/rate-limiting.test.ts:153:20)
+2025-09-17T08:18:10.7862991Z         at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-17T08:18:10.7863308Z 
+2025-09-17T08:18:10.7864611Z     [0m [90m 86 |[39m   [36mprivate[39m handleError(error[33m:[39m [33mError[39m[33m,[39m callback[33m?[39m[33m:[39m (err[33m?[39m[33m:[39m any) [33m=>[39m [36mvoid[39m)[33m:[39m [36mvoid[39m {
+2025-09-17T08:18:10.7865428Z      [90m 87 |[39m     [36mif[39m ([36mthis[39m[33m.[39mlogErrors) {
+2025-09-17T08:18:10.7866076Z     [31m[1m>[22m[39m[90m 88 |[39m       console[33m.[39merror([32m'ValkeyStore error:'[39m[33m,[39m error)[33m;[39m
+2025-09-17T08:18:10.7866624Z      [90m    |[39m               [31m[1m^[22m[39m
+2025-09-17T08:18:10.7866932Z      [90m 89 |[39m     }
+2025-09-17T08:18:10.7867234Z      [90m 90 |[39m     [36mif[39m (callback) {
+2025-09-17T08:18:10.7867601Z      [90m 91 |[39m       callback(error)[33m;[39m[0m
+2025-09-17T08:18:10.7867802Z 
+2025-09-17T08:18:10.7867996Z       at ValkeyStore.error [as handleError] (src/index.ts:88:15)
+2025-09-17T08:18:10.7868364Z       at handleError (src/index.ts:166:18)
+2025-09-17T08:18:10.7868545Z 
+2025-09-17T08:18:10.7889674Z   console.error
+2025-09-17T08:18:10.7890099Z     Failed to save session: ClosingError: 
+2025-09-17T08:18:10.7891258Z         at /home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:6490:20
+2025-09-17T08:18:10.7892301Z         at Array.forEach (<anonymous>)
+2025-09-17T08:18:10.7893692Z         at GlideClient.close (/home/runner/work/connect-valkey-glide/connect-valkey-glide/node_modules/@valkey/valkey-glide/build-ts/BaseClient.js:6489:39)
+2025-09-17T08:18:10.7895669Z         at Object.<anonymous> (/home/runner/work/connect-valkey-glide/connect-valkey-glide/test/real-world/rate-limiting.test.ts:153:20)
+2025-09-17T08:18:10.7896553Z         at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-09-17T08:18:10.7896943Z 
+2025-09-17T08:18:10.7897331Z     [0m [90m 78 |[39m       req[33m.[39msession[33m.[39mrateLimit [33m=[39m rateLimit[33m;[39m
+2025-09-17T08:18:10.7897887Z      [90m 79 |[39m       req[33m.[39msession[33m.[39msave((err) [33m=>[39m {
+2025-09-17T08:18:10.7898612Z     [31m[1m>[22m[39m[90m 80 |[39m         [36mif[39m (err) console[33m.[39merror([32m'Failed to save session:'[39m[33m,[39m err)[33m;[39m
+2025-09-17T08:18:10.7899196Z      [90m    |[39m                          [31m[1m^[22m[39m
+2025-09-17T08:18:10.7899541Z      [90m 81 |[39m       })[33m;[39m
+2025-09-17T08:18:10.7900152Z      [90m 82 |[39m
+2025-09-17T08:18:10.7900484Z      [90m 83 |[39m       next()[33m;[39m[0m
+2025-09-17T08:18:10.7900673Z 
+2025-09-17T08:18:10.7900826Z       at test/real-world/rate-limiting.test.ts:80:26
+2025-09-17T08:18:10.7901488Z       at ValkeyStore.callback [as handleError] (src/index.ts:91:7)
+2025-09-17T08:18:10.7902079Z       at handleError (src/index.ts:166:18)
+2025-09-17T08:18:10.7902371Z 
+2025-09-17T08:18:13.4716391Z FAIL test/real-world/rate-limiting.test.ts (7.429 s)
+2025-09-17T08:18:13.4717088Z   Rate Limiting with Session Tracking
+2025-09-17T08:18:13.4717523Z     Standalone Mode
+2025-09-17T08:18:13.4718247Z       ✓ should track requests per session (59 ms)
+2025-09-17T08:18:13.4718960Z       ✓ should persist rate limit state in Valkey (35 ms)
+2025-09-17T08:18:13.4719752Z       ✓ should handle concurrent requests from same session (21 ms)
+2025-09-17T08:18:13.4720545Z       ✓ should reset rate limit after window expires (2058 ms)
+2025-09-17T08:18:13.4721436Z       ✓ should handle block duration correctly (2158 ms)
+2025-09-17T08:18:13.4722185Z       ✓ should isolate rate limits between sessions (64 ms)
+2025-09-17T08:18:13.4722941Z       ✓ should allow manual rate limit reset (57 ms)
+2025-09-17T08:18:13.4723752Z       ✕ should handle TTL expiration of session data (2563 ms)
+2025-09-17T08:18:13.4724504Z     Cluster Mode
+2025-09-17T08:18:13.4725118Z       ✓ should handle rate limiting in cluster mode (45 ms)
+2025-09-17T08:18:13.4725520Z 
+2025-09-17T08:18:13.4726308Z   ● Rate Limiting with Session Tracking › Standalone Mode › should handle TTL expiration of session data
+2025-09-17T08:18:13.4726986Z 
+2025-09-17T08:18:13.4727305Z     expect(received).toBe(expected) // Object.is equality
+2025-09-17T08:18:13.4727696Z 
+2025-09-17T08:18:13.4727873Z     Expected: 429
+2025-09-17T08:18:13.4728217Z     Received: 200
+2025-09-17T08:18:13.4728418Z 
+2025-09-17T08:18:13.4728983Z     [0m [90m 363 |[39m       [90m// 6th request in new session should be rate limited[39m
+2025-09-17T08:18:13.4730423Z      [90m 364 |[39m       [36mconst[39m finalResponse [33m=[39m [36mawait[39m agent[33m.[39m[36mget[39m([32m'/api/data'[39m)[33m;[39m
+2025-09-17T08:18:13.4731922Z     [31m[1m>[22m[39m[90m 365 |[39m       expect(finalResponse[33m.[39mstatus)[33m.[39mtoBe([35m429[39m)[33m;[39m
+2025-09-17T08:18:13.4732978Z      [90m     |[39m                                    [31m[1m^[22m[39m
+2025-09-17T08:18:13.4733644Z      [90m 366 |[39m     })[33m;[39m
+2025-09-17T08:18:13.4734397Z      [90m 367 |[39m   })[33m;[39m
+2025-09-17T08:18:13.4735003Z      [90m 368 |[39m[0m
+2025-09-17T08:18:13.4735250Z 
+2025-09-17T08:18:13.4735656Z       at Object.<anonymous> (test/real-world/rate-limiting.test.ts:365:36)
+2025-09-17T08:18:13.4736161Z 
+2025-09-17T08:18:15.6457175Z PASS test/real-world/passport-auth.test.ts
+2025-09-17T08:18:15.6457868Z   Passport.js Authentication Integration
+2025-09-17T08:18:15.6458324Z     Standalone Mode
+2025-09-17T08:18:15.6459164Z       ✓ should handle complete authentication lifecycle (62 ms)
+2025-09-17T08:18:15.6460004Z       ✓ should persist sessions across multiple requests (43 ms)
+2025-09-17T08:18:15.6460819Z       ✓ should handle failed authentication attempts (19 ms)
+2025-09-17T08:18:15.6461600Z       ✓ should handle session expiration correctly (1530 ms)
+2025-09-17T08:18:15.6462423Z       ✓ should handle concurrent users with separate sessions (58 ms)
+2025-09-17T08:18:15.6463346Z       ✓ should properly serialize and deserialize user objects (24 ms)
+2025-09-17T08:18:15.6463916Z     Cluster Mode
+2025-09-17T08:18:15.6464955Z       ✓ should handle authentication in cluster mode (33 ms)
+2025-09-17T08:18:15.6465356Z 
+2025-09-17T08:18:15.9166168Z   console.log
+2025-09-17T08:18:15.9166585Z     Valkey already running, using existing instance
+2025-09-17T08:18:15.9166825Z 
+2025-09-17T08:18:15.9167035Z       at Object.connect (test/contract/testdata/server.ts:32:15)
+2025-09-17T08:18:15.9167286Z 
+2025-09-17T08:18:15.9652609Z   console.log
+2025-09-17T08:18:15.9653748Z     Stopping Valkey...
+2025-09-17T08:18:15.9654005Z 
+2025-09-17T08:18:15.9654661Z       at Object.disconnect (test/contract/testdata/server.ts:69:13)
+2025-09-17T08:18:15.9655140Z 
+2025-09-17T08:18:16.0553739Z   console.log
+2025-09-17T08:18:16.0554327Z     Valkey stopped successfully
+2025-09-17T08:18:16.0554619Z 
+2025-09-17T08:18:16.0554861Z       at Object.disconnect (test/contract/testdata/server.ts:72:13)
+2025-09-17T08:18:16.0555146Z 
+2025-09-17T08:18:16.0613379Z PASS test/contract/index.test.ts
+2025-09-17T08:18:16.0613997Z   ✓ setup (11 ms)
+2025-09-17T08:18:16.0614491Z   ✓ defaults (2 ms)
+2025-09-17T08:18:16.0614729Z   ✓ valkey (43 ms)
+2025-09-17T08:18:16.0614954Z   ✓ teardown (91 ms)
+2025-09-17T08:18:16.0615083Z 
+2025-09-17T08:18:16.5122466Z PASS test/integration/cluster.test.ts
+2025-09-17T08:18:16.5123111Z   ValkeyStore Cluster Integration
+2025-09-17T08:18:16.5123543Z     Cluster Operations
+2025-09-17T08:18:16.5124669Z       ✓ should handle basic CRUD operations in cluster mode (15 ms)
+2025-09-17T08:18:16.5125543Z       ✓ should handle SCAN operations with MGET in cluster mode (70 ms)
+2025-09-17T08:18:16.5126368Z       ✓ should handle cursor.isFinished() correctly in cluster mode (165 ms)
+2025-09-17T08:18:16.5127072Z       ✓ should handle promise-based API in cluster mode (14 ms)
+2025-09-17T08:18:16.5127400Z 
+2025-09-17T08:18:24.4656067Z [2m2025-09-17T08:18:24.465232Z[0m [33m WARN[0m [2mlogger_core[0m[2m:[0m connection creation - Failed connecting to 10.255.255.1:6379, due to timed out
+2025-09-17T08:18:24.4658427Z [2m2025-09-17T08:18:24.465278Z[0m [31mERROR[0m [2mlogger_core[0m[2m:[0m client creation - Connection error: Standalone(Received error for address `10.255.255.1:6379`: timed out
+2025-09-17T08:18:24.4659254Z )
+2025-09-17T08:18:24.4660455Z [2m2025-09-17T08:18:24.465282Z[0m [31mERROR[0m [2mlogger_core[0m[2m:[0m client creation - Connection error: Standalone(Received error for address `10.255.255.1:6379`: timed out
+2025-09-17T08:18:24.4661297Z )
+2025-09-17T08:18:24.4956768Z PASS test/integration/connection.test.ts (7.973 s)
+2025-09-17T08:18:24.4957416Z   Valkey Connection Integration Tests
+2025-09-17T08:18:24.4957867Z     Standalone Connection
+2025-09-17T08:18:24.4958701Z       ✓ should successfully connect to standalone Valkey (3 ms)
+2025-09-17T08:18:24.4959410Z       ✓ should handle basic operations (3 ms)
+2025-09-17T08:18:24.4960018Z       ✓ should handle TTL operations (3 ms)
+2025-09-17T08:18:24.4960319Z     Cluster Connection
+2025-09-17T08:18:24.4960721Z       ✓ should connect to Valkey cluster if available (7 ms)
+2025-09-17T08:18:24.4961197Z       ✓ should handle cross-slot operations in cluster mode (8 ms)
+2025-09-17T08:18:24.4961555Z     ValkeyStore Connection
+2025-09-17T08:18:24.4961910Z       ✓ should create ValkeyStore with real client (2 ms)
+2025-09-17T08:18:24.4962343Z       ✓ should handle store operations with real client (4 ms)
+2025-09-17T08:18:24.4962657Z     Error Handling
+2025-09-17T08:18:24.4963000Z       ✓ should handle connection timeouts gracefully (7729 ms)
+2025-09-17T08:18:24.4963423Z       ✓ should handle connection failures (15 ms)
+2025-09-17T08:18:24.4963704Z     Connection Lifecycle
+2025-09-17T08:18:24.4964033Z       ✓ should handle connection close properly (3 ms)
+2025-09-17T08:18:24.4964672Z       ✓ should handle multiple rapid connections (3 ms)
+2025-09-17T08:18:24.4964888Z 
+2025-09-17T08:18:24.8604554Z FAIL test/contract/connect-redis-exact.test.ts
+2025-09-17T08:18:24.8606658Z   ● Test suite failed to run
+2025-09-17T08:18:24.8606988Z 
+2025-09-17T08:18:24.8608167Z     [96mtest/contract/connect-redis-exact.test.ts[0m:[93m94[0m:[93m30[0m - [91merror[0m[90m TS2339: [0mProperty 'foo' does not exist on type 'SessionData'.
+2025-09-17T08:18:24.8609060Z 
+2025-09-17T08:18:24.8609488Z     [7m94[0m   expect(allSessions!['123'].foo).toBe('bar');
+2025-09-17T08:18:24.8610177Z     [7m  [0m [91m                             ~~~[0m
+2025-09-17T08:18:24.8610507Z 
+2025-09-17T08:18:24.8802652Z ----------|---------|----------|---------|---------|--------------------------------------------------------------------------
+2025-09-17T08:18:24.8803952Z File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                                                        
+2025-09-17T08:18:24.8805073Z ----------|---------|----------|---------|---------|--------------------------------------------------------------------------
+2025-09-17T08:18:24.8808144Z All files |   84.79 |    74.15 |   73.33 |   84.75 |                                                                          
+2025-09-17T08:18:24.8811417Z  index.ts |   84.43 |    74.15 |   75.43 |   84.56 | 75-79,93,117-119,150,188,249-254,263-264,276,296,317,342-346,448-452,463 
+2025-09-17T08:18:24.8812428Z  types.ts |     100 |      100 |   33.33 |     100 |                                                                          
+2025-09-17T08:18:24.8813520Z ----------|---------|----------|---------|---------|--------------------------------------------------------------------------
+2025-09-17T08:18:24.8946826Z Test Suites: 3 failed, 9 passed, 12 total
+2025-09-17T08:18:24.8947547Z Tests:       2 failed, 2 skipped, 85 passed, 89 total
+2025-09-17T08:18:24.8948115Z Snapshots:   0 total
+2025-09-17T08:18:24.8948497Z Time:        66.6 s
+2025-09-17T08:18:24.8948858Z Ran all test suites.
+2025-09-17T08:18:25.8961684Z Jest did not exit one second after the test run has completed.
+2025-09-17T08:18:25.8962002Z 
+2025-09-17T08:18:25.8962814Z 'This usually means that there are asynchronous operations that weren't stopped in your tests. Consider running Jest with `--detectOpenHandles` to troubleshoot this issue.
+2025-09-17T08:47:30.3675560Z ##[error]The action 'Run all tests with coverage' has timed out after 30 minutes.
+2025-09-17T08:47:30.3719661Z ##[group]Run docker rm -f valkey-standalone || true
+2025-09-17T08:47:30.3720054Z [36;1mdocker rm -f valkey-standalone || true[0m
+2025-09-17T08:47:30.3720438Z [36;1mdocker compose -f docker-compose.cluster.yml down -v || true[0m
+2025-09-17T08:47:30.3749392Z shell: /usr/bin/bash -e {0}
+2025-09-17T08:47:30.3749620Z env:
+2025-09-17T08:47:30.3749794Z   JEST_MAX_WORKERS: 1
+2025-09-17T08:47:30.3749995Z ##[endgroup]
+2025-09-17T08:47:30.4955216Z valkey-standalone
+2025-09-17T08:47:30.5792408Z  Container connect-valkey-glide-redis-cluster-init-1  Stopping
+2025-09-17T08:47:30.5795531Z  Container connect-valkey-glide-redis-cluster-init-1  Stopped
+2025-09-17T08:47:30.5796625Z  Container connect-valkey-glide-redis-cluster-init-1  Removing
+2025-09-17T08:47:30.5846610Z  Container connect-valkey-glide-redis-cluster-init-1  Removed
+2025-09-17T08:47:30.5849254Z  Container connect-valkey-glide-redis-node-2-1  Stopping
+2025-09-17T08:47:30.5850114Z  Container connect-valkey-glide-redis-node-3-1  Stopping
+2025-09-17T08:47:30.5850895Z  Container connect-valkey-glide-redis-node-1-1  Stopping
+2025-09-17T08:47:30.7451340Z  Container connect-valkey-glide-redis-node-1-1  Stopped
+2025-09-17T08:47:30.7453540Z  Container connect-valkey-glide-redis-node-1-1  Removing
+2025-09-17T08:47:30.7516567Z  Container connect-valkey-glide-redis-node-1-1  Removed
+2025-09-17T08:47:30.8127026Z  Container connect-valkey-glide-redis-node-2-1  Stopped
+2025-09-17T08:47:30.8162949Z  Container connect-valkey-glide-redis-node-2-1  Removing
+2025-09-17T08:47:30.8163801Z  Container connect-valkey-glide-redis-node-3-1  Stopped
+2025-09-17T08:47:30.8165308Z  Container connect-valkey-glide-redis-node-3-1  Removing
+2025-09-17T08:47:30.8166095Z  Container connect-valkey-glide-redis-node-2-1  Removed
+2025-09-17T08:47:30.8196096Z  Container connect-valkey-glide-redis-node-3-1  Removed
+2025-09-17T08:47:30.8197971Z  Network connect-valkey-glide_redis-cluster  Removing
+2025-09-17T08:47:30.9337270Z  Network connect-valkey-glide_redis-cluster  Removed
+2025-09-17T08:47:30.9457203Z Post job cleanup.
+2025-09-17T08:47:31.0683522Z [command]/usr/bin/git version
+2025-09-17T08:47:31.0683902Z git version 2.51.0
+2025-09-17T08:47:31.0688181Z Temporarily overriding HOME='/home/runner/work/_temp/46deaba0-bc8a-46f6-b2a6-8bc65280aca3' before making global git config changes
+2025-09-17T08:47:31.0689294Z Adding repository directory to the temporary git global config as a safe directory
+2025-09-17T08:47:31.0690109Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/connect-valkey-glide/connect-valkey-glide
+2025-09-17T08:47:31.0691173Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-09-17T08:47:31.0692868Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-09-17T08:47:31.0841438Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-09-17T08:47:31.0859280Z http.https://github.com/.extraheader
+2025-09-17T08:47:31.0872736Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2025-09-17T08:47:31.0903673Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-09-17T08:47:31.1247962Z Cleaning up orphan processes
+2025-09-17T08:47:31.1550569Z Terminate orphan process: pid (2925) (npm run test:coverage)
+2025-09-17T08:47:31.1585900Z Terminate orphan process: pid (2936) (sh)
+2025-09-17T08:47:31.1607868Z Terminate orphan process: pid (2937) (node)
