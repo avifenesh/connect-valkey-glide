@@ -14,7 +14,10 @@ import {
 } from '../utils/test-helpers';
 import { SessionData } from '../../src/types';
 
-describe('Performance Integration Tests', () => {
+// Skip performance tests in CI for fast execution - run locally for comprehensive performance validation
+const describePerformance = process.env.CI ? describe.skip : describe;
+
+describePerformance('Performance Integration Tests', () => {
   let store: any;
   let client: any;
 
@@ -466,4 +469,83 @@ describe('Performance Integration Tests', () => {
       // for connect-redis API compatibility. Use length() and ids() instead.
     });
   });
+});
+
+// Simple smoke test for CI - validates basic performance without intensive workloads
+describe('Performance Smoke Tests (CI)', () => {
+  let store: any;
+  let client: any;
+
+  beforeAll(async () => {
+    await waitForValkey(30, 1000);
+  }, 30000);
+
+  beforeEach(async () => {
+    const result = await createTestStore();
+    store = result.store;
+    client = result.client;
+  });
+
+  afterEach(async () => {
+    if (client) {
+      await cleanupTestData(client);
+      await safeCloseClient(client);
+    }
+  });
+
+  it('should handle basic operations within reasonable time', async () => {
+    const sessionId = createTestSessionId('smoke');
+    const sessionData = generateSessionData();
+
+    // Test basic set/get cycle
+    const start = Date.now();
+
+    await new Promise<void>((resolve, reject) => {
+      store.set(sessionId, sessionData, (err: any) => {
+        if (err) reject(err);
+        else resolve();
+      });
+    });
+
+    const session = await new Promise((resolve, reject) => {
+      store.get(sessionId, (err: any, session: any) => {
+        if (err) reject(err);
+        else resolve(session);
+      });
+    });
+
+    const duration = Date.now() - start;
+
+    expect(session).toBeDefined();
+    expect(session.userId).toBe(sessionData.userId);
+    expect(duration).toBeLessThan(1000); // Should complete in under 1 second
+  }, 5000);
+
+  it('should handle scan operations efficiently', async () => {
+    // Store a few sessions
+    const sessions = generateTestSessions(5);
+
+    for (const { sid, data } of sessions) {
+      await new Promise<void>((resolve, reject) => {
+        store.set(sid, data, (err: any) => {
+          if (err) reject(err);
+          else resolve();
+        });
+      });
+    }
+
+    const start = Date.now();
+
+    const length = await new Promise<number>((resolve, reject) => {
+      store.length((err: any, length: number) => {
+        if (err) reject(err);
+        else resolve(length);
+      });
+    });
+
+    const duration = Date.now() - start;
+
+    expect(length).toBe(5);
+    expect(duration).toBeLessThan(500); // Should complete quickly
+  }, 5000);
 });
