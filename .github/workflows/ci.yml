@@ -209,14 +209,11 @@ jobs:
           done
           docker exec $(docker ps -qf "name=redis-node-1") redis-cli -p 8001 cluster info
 
-      - name: Run all tests
+      - name: Run all tests with coverage
+        timeout-minutes: 30
         run: |
-          npm run test:contract
-          npm run test:integration
-          npm run test:e2e
-
-      - name: Generate coverage report
-        run: npm run test:coverage
+          export JEST_MAX_WORKERS=2
+          npm run test:coverage
 
       - name: Upload coverage
         uses: codecov/codecov-action@v4
