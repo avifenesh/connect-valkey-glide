@@ -102,6 +102,10 @@ export class ValkeyStore extends Store {
   async get(sid: string, callback?: (err: any, session?: SessionData | null) => void): Promise<SessionData | null | void> {
     const fn = (cb: (err: any, session?: SessionData | null) => void) => {
       const key = this.key(sid);
+      // Debug logging for CI issues
+      if (process.env.CI && sid.includes('crud')) {
+        console.log('Getting session with key:', key);
+      }
 
       this.client.get(key)
         .then((data) => {
@@ -141,6 +145,10 @@ export class ValkeyStore extends Store {
     const fn = (cb: (err?: any) => void) => {
       const key = this.key(sid);
       const ttl = this.getTTL(session);
+      // Debug logging for CI issues
+      if (process.env.CI && sid.includes('crud')) {
+        console.log('Setting session with key:', key);
+      }
 
       // If TTL is 0 or negative (expired), delete the session instead
       if (ttl <= 0 && !this.disableTTL) {
