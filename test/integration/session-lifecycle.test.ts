@@ -52,6 +52,9 @@ describe('Session Lifecycle Integration Tests', () => {
         });
       });
 
+      // Small delay to ensure data is persisted
+      await new Promise(resolve => setTimeout(resolve, 50));
+
       // READ - Get session
       const retrievedSession = await new Promise((resolve, reject) => {
         store.get(sessionId, (err: any, session: any) => {
@@ -70,6 +73,9 @@ describe('Session Lifecycle Integration Tests', () => {
           else resolve();
         });
       });
+
+      // Small delay to ensure update is persisted
+      await new Promise(resolve => setTimeout(resolve, 50));
 
       const updatedSession = await new Promise((resolve, reject) => {
         store.get(sessionId, (err: any, session: any) => {

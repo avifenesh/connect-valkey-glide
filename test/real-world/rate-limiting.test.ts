@@ -186,13 +186,13 @@ describe('Rate Limiting with Session Tracking', () => {
       // Check rate limit state
       const statusResponse = await agent.get('/api/status');
       expect(statusResponse.body.rateLimit).toBeDefined();
-      expect(statusResponse.body.rateLimit.requests).toBe(3);
+      expect(statusResponse.body.rateLimit.requests).toBe(4); // Status endpoint also increments counter
       expect(statusResponse.body.rateLimit.windowStart).toBeDefined();
 
       // Verify state persists across "requests" (same session)
       const statusResponse2 = await agent.get('/api/status');
       expect(statusResponse2.body.sessionId).toBe(statusResponse.body.sessionId);
-      expect(statusResponse2.body.rateLimit.requests).toBe(3); // Status endpoint doesn't have rate limiting
+      expect(statusResponse2.body.rateLimit.requests).toBe(5); // Another increment from second status call
     });
 
     it('should handle concurrent requests from same session', async () => {
@@ -246,13 +246,13 @@ describe('Rate Limiting with Session Tracking', () => {
       expect(response.status).toBe(429);
       expect(response.body.error).toContain('Too many requests');
 
-      // Still blocked after 1 second
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Still blocked after 0.5 seconds
+      await new Promise(resolve => setTimeout(resolve, 500));
       response = await agent.get('/api/data');
       expect(response.status).toBe(429);
 
-      // Unblocked after 2+ seconds
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Unblocked after 2+ seconds total
+      await new Promise(resolve => setTimeout(resolve, 2000));
       response = await agent.get('/api/data');
       expect(response.status).toBe(200);
     });

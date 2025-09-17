@@ -225,7 +225,7 @@ jobs:
         if: always()
         run: |
           docker rm -f valkey-standalone || true
-          docker compose -f docker compose.cluster.yml down -v || true
+          docker compose -f docker-compose.cluster.yml down -v || true
 
   build-examples:
     name: Build Examples
