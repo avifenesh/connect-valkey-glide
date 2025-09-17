@@ -20,6 +20,16 @@ export async function connect(): Promise<void> {
   }
 
   try {
+    // First check if Valkey is already running
+    try {
+      await waitForValkey();
+      console.log('Valkey already running, using existing instance');
+      valkeyStarted = true;
+      return;
+    } catch {
+      // Valkey not running, we need to start it
+    }
+
     // Clean up any existing containers first
     console.log('Starting Valkey for contract tests...');
     try {
