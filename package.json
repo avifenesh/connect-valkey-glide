@@ -13,7 +13,7 @@
     "test:integration:cluster": "jest test/integration/cluster.test.ts",
     "test:e2e": "jest --testPathPatterns='test/e2e/'",
     "test:e2e:ci": "jest --testPathPatterns='test/e2e/' --testPathIgnorePatterns='load-test'",
-    "test:integration:ci": "jest --testPathPatterns='test/integration/' --testPathIgnorePatterns='performance'",
+    "test:integration:ci": "jest --testPathPatterns='test/integration/' --testPathIgnorePatterns='performance|cluster'",
     "test:load": "jest --testPathPatterns='test/e2e/load-test.test.ts'",
     "test:performance": "jest test/integration/performance.test.ts --testTimeout=60000",
     "test:real": "npm run valkey:start && npm run test:integration && npm run test:e2e && npm run valkey:stop",
