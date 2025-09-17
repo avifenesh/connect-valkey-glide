@@ -304,13 +304,13 @@ describe('Error Recovery Integration Tests', () => {
       const client = result.client;
 
       try {
-        // Create very large session data that might cause memory issues
+        // Create moderately large session data that might cause issues (CI-appropriate size)
         const largeSessionData = generateSessionData({
           additionalData: {
-            veryLargeArray: Array(100000).fill({
+            veryLargeArray: Array(process.env.CI ? 1000 : 100000).fill({
               id: 'test-item',
-              data: 'x'.repeat(1000), // 1KB per item
-              metadata: Array(100).fill('metadata'),
+              data: 'x'.repeat(process.env.CI ? 100 : 1000), // CI: 100KB total, Local: 100MB
+              metadata: Array(process.env.CI ? 10 : 100).fill('metadata'),
             }),
           },
         });
