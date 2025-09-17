@@ -19,7 +19,7 @@ module.exports = {
   // Different timeout for integration tests
   testTimeout: process.env.CI ? 30000 : 10000,
   // Run tests sequentially in CI to avoid race conditions
-  maxWorkers: process.env.CI ? 1 : undefined,
+  maxWorkers: process.env.CI ? 1 : 4,
   // Setup files for integration tests
   setupFilesAfterEnv: ['<rootDir>/test/setup.ts'],
   // Module path mapping for test utilities

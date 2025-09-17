@@ -1,4 +1,4 @@
-import { GlideClient, GlideClusterClient, Batch, ClusterBatch, TimeUnit, ClusterScanCursor } from '@valkey/valkey-glide';
+import { GlideClient, GlideClusterClient, TimeUnit, ClusterScanCursor } from '@valkey/valkey-glide';
 import { SessionData, Store, Session, Cookie, ValkeyStoreOptions, ValkeyClient } from './types';
 import { Request } from 'express';
 
@@ -65,20 +65,24 @@ export class ValkeyStore extends Store {
    * Generate session key with prefix
    */
   private key(sid: string): string {
+    // Validate session ID to prevent injection attacks
+    if (!sid || typeof sid !== 'string') {
+      throw new TypeError('Session ID must be a non-empty string');
+    }
+
+    // Check for dangerous characters that could cause issues
+    if (sid.includes('\0') || sid.includes('\n') || sid.includes('\r')) {
+      throw new Error('Invalid session ID format: contains control characters');
+    }
+
+    // Reasonable length limit to prevent abuse
+    if (sid.length > 255) {
+      throw new Error('Session ID too long: maximum 255 characters allowed');
+    }
+
     return `${this.prefix}${sid}`;
   }
 
-  /**
-   * Execute batch command with proper typing for both standalone and cluster clients
-   */
-  private async executeBatch(batch: Batch, atomic: boolean = false): Promise<any[] | null> {
-    if (this.client instanceof GlideClient) {
-      return this.client.exec(batch, atomic);
-    } else {
-      // For cluster client, we need to cast the batch
-      return this.client.exec(batch as any, atomic);
-    }
-  }
 
   /**
    * Handle errors with optional logging
@@ -87,10 +91,13 @@ export class ValkeyStore extends Store {
     if (this.logErrors) {
       console.error('ValkeyStore error:', error);
     }
+
+    // Always emit for monitoring and observability
+    this.emit('error', error);
+
+    // Also call callback if provided
     if (callback) {
       callback(error);
-    } else {
-      this.emit('error', error);
     }
   }
 
@@ -226,49 +233,63 @@ export class ValkeyStore extends Store {
     const fn = async (cb: (err: any, obj?: { [sid: string]: SessionData } | null) => void) => {
       const pattern = `${this.prefix}*`;
       const sessions: { [sid: string]: SessionData } = {};
+      const MAX_BATCH_SIZE = 1000; // Limit batch size to prevent memory issues
+      let totalProcessed = 0;
 
       try {
-        // Process scan results in batches
+        // Process scan results in batches with memory optimization
         await this.scanAndProcessKeys(pattern, async (keys) => {
           if (keys.length === 0) return;
 
-          // Use MGET for batch retrieval - works in both standalone and cluster
-          const values = await this.client.mget(keys);
+          // Process in smaller chunks to limit memory usage
+          for (let i = 0; i < keys.length; i += MAX_BATCH_SIZE) {
+            const chunk = keys.slice(i, Math.min(i + MAX_BATCH_SIZE, keys.length));
 
-          // Process the values
-          const parsePromises: Promise<void>[] = [];
+            // Use MGET for batch retrieval - works in both standalone and cluster
+            const values = await this.client.mget(chunk);
 
-          values.forEach((data, index) => {
-            if (data) {
-              const sid = keys[index].replace(this.prefix, '');
+            // Process the values for this chunk
+            const parsePromises: Promise<void>[] = [];
 
-              try {
-                const parseResult = this.serializer.parse(data as string);
+            values.forEach((data, index) => {
+              if (data) {
+                const sid = chunk[index].replace(this.prefix, '');
 
-                if (parseResult instanceof Promise) {
-                  parsePromises.push(
-                    parseResult
-                      .then(session => { sessions[sid] = session; })
-                      .catch(error => {
-                        if (this.logErrors) {
-                          console.warn('ValkeyStore: Invalid session data for key:', keys[index]);
-                        }
-                      })
-                  );
-                } else {
-                  sessions[sid] = parseResult;
-                }
-              } catch (error) {
-                // Skip invalid sessions
-                if (this.logErrors) {
-                  console.warn('ValkeyStore: Invalid session data for key:', keys[index]);
+                try {
+                  const parseResult = this.serializer.parse(data as string);
+
+                  if (parseResult instanceof Promise) {
+                    parsePromises.push(
+                      parseResult
+                        .then(session => { sessions[sid] = session; })
+                        .catch(error => {
+                          if (this.logErrors) {
+                            console.warn('ValkeyStore: Invalid session data for key:', chunk[index]);
+                          }
+                        })
+                    );
+                  } else {
+                    sessions[sid] = parseResult;
+                  }
+                } catch (error) {
+                  // Skip invalid sessions
+                  if (this.logErrors) {
+                    console.warn('ValkeyStore: Invalid session data for key:', chunk[index]);
+                  }
                 }
               }
-            }
-          });
+            });
 
-          // Wait for all async parsing to complete for this batch
-          await Promise.all(parsePromises);
+            // Wait for all async parsing to complete for this chunk
+            await Promise.all(parsePromises);
+
+            totalProcessed += chunk.length;
+
+            // Memory warning for large datasets
+            if (totalProcessed > 10000 && this.logErrors) {
+              console.warn(`ValkeyStore: Large number of sessions loaded (${totalProcessed}). Consider using pagination or filtering.`);
+            }
+          }
         });
 
         cb(null, sessions);
@@ -358,14 +379,17 @@ export class ValkeyStore extends Store {
       return -1; // Never expire
     }
 
+    // Capture timestamp once to avoid race conditions
+    const now = Date.now();
+
     // Check if cookie has expires field (Date or string)
     if (session.cookie && session.cookie.expires) {
       const expires = session.cookie.expires instanceof Date
-        ? session.cookie.expires
-        : new Date(session.cookie.expires);
-      const now = Date.now();
-      const ttl = Math.floor((expires.getTime() - now) / 1000);
-      return ttl > 0 ? ttl : 0;
+        ? session.cookie.expires.getTime()
+        : new Date(session.cookie.expires).getTime();
+
+      const ttl = Math.floor((expires - now) / 1000);
+      return Math.max(0, ttl); // Ensure non-negative TTL
     }
 
     // Fallback to maxAge

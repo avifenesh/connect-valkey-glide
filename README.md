@@ -88,6 +88,33 @@ const client = await GlideClusterClient.createClient({
 const store = new ValkeyStore({ client });
 ```
 
+## Security Features
+
+This library includes several security enhancements:
+
+- **Session ID Validation**: Automatically validates session IDs to prevent injection attacks
+- **Memory Protection**: Optimized `all()` method prevents memory exhaustion with large session stores
+- **TTL Safety**: Race condition-free TTL calculation ensures consistent expiration
+- **Error Monitoring**: Enhanced error handling for better observability
+
+### Production Security Best Practices
+
+```javascript
+app.use(session({
+  store: new ValkeyStore({ client }),
+  secret: process.env.SESSION_SECRET, // Use environment variables
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: true,      // HTTPS only
+    httpOnly: true,    // Prevent XSS
+    sameSite: 'strict', // CSRF protection
+    maxAge: 30 * 60 * 1000 // 30 minutes
+  },
+  genid: () => crypto.randomUUID() // Strong session ID generation
+}));
+```
+
 ## Testing
 
 ```bash
