@@ -160,7 +160,7 @@ jobs:
         run: docker compose -f docker-compose.cluster.yml down -v
 
   test-all-modes:
-    name: All Tests (Standalone + Cluster)
+    name: Comprehensive Test Suite
     runs-on: ubuntu-latest
     needs: lint-and-build
 
@@ -173,42 +173,39 @@ jobs:
           node-version: '20.x'
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Build and test contract layer
+        run: |
+          npm ci
+          npm run build
+          npm run test:contract
 
-      - name: Build
-        run: npm run build
-
-      - name: Start Valkey standalone
+      - name: Test standalone mode
         run: |
           docker run -d --name valkey-standalone \
             -p 6379:6379 \
             valkey/valkey:8.0.1
 
-      - name: Start Valkey cluster
-        run: |
-          docker compose -f docker-compose.cluster.yml up -d
-          sleep 20
-
-      - name: Wait for services
-        run: |
           until docker exec valkey-standalone valkey-cli ping; do
             echo "Waiting for standalone..."
             sleep 1
           done
+
+          export JEST_MAX_WORKERS=1
+          npm run test:integration:ci
+          npm run test:e2e:ci
+
+          docker rm -f valkey-standalone
+
+      - name: Test cluster mode
+        run: |
+          docker compose -f docker-compose.cluster.yml up -d
+          sleep 20
           docker exec $(docker ps -qf "name=redis-node-1") redis-cli -p 8001 cluster info
 
-      - name: Run CI tests (includes cluster tests, excludes performance/load tests)
-        timeout-minutes: 10
-        run: |
           export JEST_MAX_WORKERS=1
-          npm run test:ci:full
+          npx jest test/integration/cluster.test.ts --testTimeout=30000
 
-      - name: Cleanup
-        if: always()
-        run: |
-          docker rm -f valkey-standalone || true
-          docker compose -f docker-compose.cluster.yml down -v || true
+          docker compose -f docker-compose.cluster.yml down -v
 
   build-examples:
     name: Build Examples
