@@ -236,63 +236,49 @@ export class ValkeyStore extends Store {
     const fn = async (cb: (err: any, obj?: { [sid: string]: SessionData } | null) => void) => {
       const pattern = `${this.prefix}*`;
       const sessions: { [sid: string]: SessionData } = {};
-      const MAX_BATCH_SIZE = 1000; // Limit batch size to prevent memory issues
-      let totalProcessed = 0;
 
       try {
-        // Process scan results in batches with memory optimization
+        // Process scan results in batches (simpler, faster approach)
         await this.scanAndProcessKeys(pattern, async (keys) => {
           if (keys.length === 0) return;
 
-          // Process in smaller chunks to limit memory usage
-          for (let i = 0; i < keys.length; i += MAX_BATCH_SIZE) {
-            const chunk = keys.slice(i, Math.min(i + MAX_BATCH_SIZE, keys.length));
+          // Use MGET for batch retrieval - works in both standalone and cluster
+          const values = await this.client.mget(keys);
 
-            // Use MGET for batch retrieval - works in both standalone and cluster
-            const values = await this.client.mget(chunk);
+          // Process the values
+          const parsePromises: Promise<void>[] = [];
 
-            // Process the values for this chunk
-            const parsePromises: Promise<void>[] = [];
+          values.forEach((data, index) => {
+            if (data) {
+              const sid = keys[index].replace(this.prefix, '');
 
-            values.forEach((data, index) => {
-              if (data) {
-                const sid = chunk[index].replace(this.prefix, '');
+              try {
+                const parseResult = this.serializer.parse(data as string);
 
-                try {
-                  const parseResult = this.serializer.parse(data as string);
-
-                  if (parseResult instanceof Promise) {
-                    parsePromises.push(
-                      parseResult
-                        .then(session => { sessions[sid] = session; })
-                        .catch(error => {
-                          if (this.logErrors) {
-                            console.warn('ValkeyStore: Invalid session data for key:', chunk[index]);
-                          }
-                        })
-                    );
-                  } else {
-                    sessions[sid] = parseResult;
-                  }
-                } catch (error) {
-                  // Skip invalid sessions
-                  if (this.logErrors) {
-                    console.warn('ValkeyStore: Invalid session data for key:', chunk[index]);
-                  }
+                if (parseResult instanceof Promise) {
+                  parsePromises.push(
+                    parseResult
+                      .then(session => { sessions[sid] = session; })
+                      .catch(error => {
+                        if (this.logErrors) {
+                          console.warn('ValkeyStore: Invalid session data for key:', keys[index]);
+                        }
+                      })
+                  );
+                } else {
+                  sessions[sid] = parseResult;
+                }
+              } catch (error) {
+                // Skip invalid sessions
+                if (this.logErrors) {
+                  console.warn('ValkeyStore: Invalid session data for key:', keys[index]);
                 }
               }
-            });
-
-            // Wait for all async parsing to complete for this chunk
-            await Promise.all(parsePromises);
-
-            totalProcessed += chunk.length;
-
-            // Memory warning for large datasets
-            if (totalProcessed > 10000 && this.logErrors) {
-              console.warn(`ValkeyStore: Large number of sessions loaded (${totalProcessed}). Consider using pagination or filtering.`);
             }
-          }
+          });
+
+          // Wait for all async parsing to complete for this batch
+          await Promise.all(parsePromises);
         });
 
         cb(null, sessions);
