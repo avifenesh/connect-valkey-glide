@@ -21,7 +21,7 @@
     "test:cluster": "npm run cluster:setup && npm run test:integration:cluster; npm run cluster:stop",
     "test:all": "npm run test:contract && npm run test:standalone && npm run test:cluster",
     "test:ci": "npm run test:contract && npm run test:integration:ci && npm run test:e2e:ci",
-    "test:ci:full": "npm run test:contract && npm run valkey:start && npm run test:integration:ci && npm run test:e2e:ci && npm run valkey:stop",
+    "test:ci:full": "npm run test:contract && npm run test:integration && npm run test:e2e:ci",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "clean": "npm run valkey:stop && docker system prune -f --volumes",

@@ -198,11 +198,11 @@ jobs:
           done
           docker exec $(docker ps -qf "name=redis-node-1") redis-cli -p 8001 cluster info
 
-      - name: Run CI tests (excludes performance/load tests)
+      - name: Run CI tests (includes cluster tests, excludes performance/load tests)
         timeout-minutes: 10
         run: |
           export JEST_MAX_WORKERS=1
-          npm run test:ci
+          npm run test:ci:full
 
       - name: Cleanup
         if: always()
