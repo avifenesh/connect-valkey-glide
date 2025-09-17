@@ -157,7 +157,7 @@ describe('Error Recovery Integration Tests', () => {
   });
 
   describe('Data Consistency', () => {
-    it.skipIf(process.env.CI)('should handle scan operation failures gracefully', async () => {
+    (process.env.CI ? it.skip : it)('should handle scan operation failures gracefully', async () => {
       const result = await createTestStore({ logErrors: false });
       const store = result.store;
       const client = result.client;
@@ -200,7 +200,7 @@ describe('Error Recovery Integration Tests', () => {
       }
     });
 
-    it.skipIf(process.env.CI)('should handle concurrent operations with real connection failures', async () => {
+    (process.env.CI ? it.skip : it)('should handle concurrent operations with real connection failures', async () => {
       const result = await createTestStore({ logErrors: false });
       const store = result.store;
       const client = result.client;
