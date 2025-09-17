@@ -20,9 +20,15 @@ export async function connect(): Promise<void> {
   }
 
   try {
-    // First check if Valkey is already running
+    // First check if Valkey is already running with quick timeout
     try {
-      await waitForValkey();
+      const { GlideClient } = await import('@valkey/valkey-glide');
+      const client = await GlideClient.createClient({
+        addresses: [{ host: 'localhost', port }],
+        requestTimeout: 1000,
+      });
+      await client.ping();
+      await client.close();
       console.log('Valkey already running, using existing instance');
       valkeyStarted = true;
       return;
@@ -75,14 +81,14 @@ export async function disconnect(): Promise<void> {
  */
 async function waitForValkey(): Promise<void> {
   const { GlideClient } = await import('@valkey/valkey-glide');
-  const maxRetries = 30;
-  const retryDelay = 1000;
+  const maxRetries = 10;
+  const retryDelay = 500;
 
   for (let i = 0; i < maxRetries; i++) {
     try {
       const client = await GlideClient.createClient({
         addresses: [{ host: 'localhost', port }],
-        requestTimeout: 2000,
+        requestTimeout: 1000,
       });
 
       await client.ping();
