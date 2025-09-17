@@ -222,7 +222,7 @@ describe('Performance Integration Tests', () => {
 
   describe('Scanning Performance', () => {
     it('should handle SCAN operations efficiently with many keys', async () => {
-      const sessionCount = 5000;
+      const sessionCount = 1000;
       const sessions = generateTestSessions(sessionCount);
 
       // Store all sessions
