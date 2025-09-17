@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "npm run test:contract && npm run test:real",
+    "test": "npm run test:contract && npm run test:integration && npm run test:e2e",
     "test:contract": "vitest run",
     "test:integration": "jest --testPathPatterns='test/integration/'",
     "test:integration:standalone": "jest --testPathPatterns='test/integration/' --testPathIgnorePatterns='cluster'",
