@@ -43,11 +43,16 @@ describe('Session Lifecycle Integration Tests', () => {
         hasCart: true,
         hasCookie: true,
       });
+      console.log('Test sessionId:', sessionId);
+      console.log('Test sessionData:', JSON.stringify(sessionData));
 
       // CREATE - Set session
       await new Promise<void>((resolve, reject) => {
         store.set(sessionId, sessionData, (err: any) => {
-          if (err) reject(err);
+          if (err) {
+            console.error('Error setting session:', err);
+            reject(err);
+          }
           else resolve();
         });
       });
@@ -58,8 +63,14 @@ describe('Session Lifecycle Integration Tests', () => {
       // READ - Get session
       const retrievedSession = await new Promise((resolve, reject) => {
         store.get(sessionId, (err: any, session: any) => {
-          if (err) reject(err);
-          else resolve(session);
+          if (err) {
+            console.error('Error getting session:', err);
+            reject(err);
+          }
+          else {
+            console.log('Retrieved session:', session);
+            resolve(session);
+          }
         });
       });
 
