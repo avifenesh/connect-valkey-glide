@@ -17,6 +17,7 @@ coverage/
 .env
 .env.local
 .env.*.local
+.secrets
 
 # IDE files
 .vscode/
