@@ -145,7 +145,7 @@ jobs:
 
       - name: Start Valkey cluster
         run: |
-          docker-compose -f docker-compose.cluster.yml up -d
+          docker compose -f docker compose.cluster.yml up -d
           echo "Waiting for cluster to initialize..."
           sleep 20
 
@@ -159,7 +159,7 @@ jobs:
 
       - name: Stop cluster
         if: always()
-        run: docker-compose -f docker-compose.cluster.yml down -v
+        run: docker compose -f docker compose.cluster.yml down -v
 
   test-all-modes:
     name: All Tests (Standalone + Cluster)
@@ -189,7 +189,7 @@ jobs:
 
       - name: Start Valkey cluster
         run: |
-          docker-compose -f docker-compose.cluster.yml up -d
+          docker compose -f docker compose.cluster.yml up -d
           sleep 20
 
       - name: Wait for services
@@ -220,7 +220,7 @@ jobs:
         if: always()
         run: |
           docker rm -f valkey-standalone || true
-          docker-compose -f docker-compose.cluster.yml down -v || true
+          docker compose -f docker compose.cluster.yml down -v || true
 
   build-examples:
     name: Build Examples

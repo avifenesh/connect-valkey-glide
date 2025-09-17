@@ -22,7 +22,7 @@ export async function connect(): Promise<void> {
   try {
     // Start Docker Compose Valkey
     console.log('Starting Valkey for contract tests...');
-    await execAsync('docker-compose -f docker-compose.test.yml up -d valkey-standalone');
+    await execAsync('docker compose -f docker-compose.test.yml up -d valkey-standalone');
 
     // Wait for Valkey to be ready
     await waitForValkey();
@@ -44,7 +44,7 @@ export async function disconnect(): Promise<void> {
 
   try {
     console.log('Stopping Valkey...');
-    await execAsync('docker-compose -f docker-compose.test.yml stop valkey-standalone');
+    await execAsync('docker compose -f docker-compose.test.yml stop valkey-standalone');
     valkeyStarted = false;
     console.log('Valkey stopped successfully');
   } catch (error) {
