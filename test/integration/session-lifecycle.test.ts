@@ -43,34 +43,23 @@ describe('Session Lifecycle Integration Tests', () => {
         hasCart: true,
         hasCookie: true,
       });
-      console.log('Test sessionId:', sessionId);
-      console.log('Test sessionData:', JSON.stringify(sessionData));
 
       // CREATE - Set session
       await new Promise<void>((resolve, reject) => {
         store.set(sessionId, sessionData, (err: any) => {
-          if (err) {
-            console.error('Error setting session:', err);
-            reject(err);
-          }
+          if (err) reject(err);
           else resolve();
         });
       });
 
       // Small delay to ensure data is persisted in CI environment
-      await new Promise(resolve => setTimeout(resolve, 200));
+      await new Promise(resolve => setTimeout(resolve, process.env.CI ? 500 : 100));
 
       // READ - Get session
       const retrievedSession = await new Promise((resolve, reject) => {
         store.get(sessionId, (err: any, session: any) => {
-          if (err) {
-            console.error('Error getting session:', err);
-            reject(err);
-          }
-          else {
-            console.log('Retrieved session:', session);
-            resolve(session);
-          }
+          if (err) reject(err);
+          else resolve(session);
         });
       });
 
@@ -86,17 +75,10 @@ describe('Session Lifecycle Integration Tests', () => {
       });
 
       // Small delay to ensure update is persisted in CI environment
-      await new Promise(resolve => setTimeout(resolve, 200));
+      await new Promise(resolve => setTimeout(resolve, process.env.CI ? 500 : 100));
 
-      console.log('About to get updated session');
       const updatedSession = await new Promise((resolve, reject) => {
-        let callCount = 0;
         store.get(sessionId, (err: any, session: any) => {
-          callCount++;
-          console.log(`Get callback called ${callCount} time(s), err:`, err, 'session:', session ? 'exists' : 'null');
-          if (callCount > 1) {
-            console.error('ERROR: Get callback called multiple times!');
-          }
           if (err) reject(err);
           else resolve(session);
         });

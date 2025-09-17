@@ -7,6 +7,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+env:
+  # Run Jest tests sequentially in CI to avoid race conditions
+  JEST_MAX_WORKERS: 1
+
 jobs:
   lint-and-build:
     name: Lint and Build

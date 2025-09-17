@@ -102,17 +102,9 @@ export class ValkeyStore extends Store {
   async get(sid: string, callback?: (err: any, session?: SessionData | null) => void): Promise<SessionData | null | void> {
     const fn = (cb: (err: any, session?: SessionData | null) => void) => {
       const key = this.key(sid);
-      // Debug logging for CI issues
-      if (process.env.CI && sid.includes('crud')) {
-        console.log('Getting session with key:', key);
-      }
 
       this.client.get(key)
         .then((data) => {
-          // Debug logging for CI issues
-          if (process.env.CI && sid.includes('crud')) {
-            console.log('Raw data from Valkey:', data);
-          }
           if (!data) {
             return cb(null, null);
           }
@@ -149,10 +141,6 @@ export class ValkeyStore extends Store {
     const fn = (cb: (err?: any) => void) => {
       const key = this.key(sid);
       const ttl = this.getTTL(session);
-      // Debug logging for CI issues
-      if (process.env.CI && sid.includes('crud')) {
-        console.log('Setting session with key:', key);
-      }
 
       // If TTL is 0 or negative (expired), delete the session instead
       if (ttl <= 0 && !this.disableTTL) {
@@ -173,18 +161,8 @@ export class ValkeyStore extends Store {
         } : undefined;
 
         this.client.set(key, sessionData, setOptions)
-          .then(() => {
-            // Debug logging for CI issues
-            if (process.env.CI && sid.includes('crud')) {
-              console.log('Session set successfully for key:', key);
-            }
-            cb();
-          })
+          .then(() => cb())
           .catch((error) => {
-            // Debug logging for CI issues
-            if (process.env.CI && sid.includes('crud')) {
-              console.log('Error setting session:', error);
-            }
             this.handleError(error, cb);
           });
       } catch (error) {
