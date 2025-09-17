@@ -88,8 +88,15 @@ describe('Session Lifecycle Integration Tests', () => {
       // Small delay to ensure update is persisted in CI environment
       await new Promise(resolve => setTimeout(resolve, 200));
 
+      console.log('About to get updated session');
       const updatedSession = await new Promise((resolve, reject) => {
+        let callCount = 0;
         store.get(sessionId, (err: any, session: any) => {
+          callCount++;
+          console.log(`Get callback called ${callCount} time(s), err:`, err, 'session:', session ? 'exists' : 'null');
+          if (callCount > 1) {
+            console.error('ERROR: Get callback called multiple times!');
+          }
           if (err) reject(err);
           else resolve(session);
         });
