@@ -20,7 +20,7 @@ describe('Session ID Validation', () => {
   });
 
   describe('Valid Session IDs', () => {
-    it('should accept normal session IDs', async () => {
+    it('should accept normal string session IDs', async () => {
       mockClient.get.mockResolvedValue(null);
 
       expect(async () => {
@@ -33,6 +33,22 @@ describe('Session ID Validation', () => {
 
       expect(async () => {
         await store.get('session-with-dashes');
+      }).not.toThrow();
+    });
+
+    it('should accept numeric session IDs', async () => {
+      mockClient.get.mockResolvedValue(null);
+
+      expect(async () => {
+        await store.get(123);
+      }).not.toThrow();
+
+      expect(async () => {
+        await store.get(0);
+      }).not.toThrow();
+
+      expect(async () => {
+        await store.get(999999);
       }).not.toThrow();
     });
 
@@ -50,11 +66,10 @@ describe('Session ID Validation', () => {
   });
 
   describe('Invalid Session IDs', () => {
-    it('should reject empty or non-string session IDs', async () => {
-      await expect(store.get('')).rejects.toThrow('Session ID must be a non-empty string');
-      await expect(store.get(null as any)).rejects.toThrow('Session ID must be a non-empty string');
-      await expect(store.get(undefined as any)).rejects.toThrow('Session ID must be a non-empty string');
-      await expect(store.get(123 as any)).rejects.toThrow('Session ID must be a non-empty string');
+    it('should reject empty or invalid session IDs', async () => {
+      await expect(store.get('')).rejects.toThrow('Session ID must be a non-empty value');
+      await expect(store.get(null as any)).rejects.toThrow('Session ID must be a non-empty value');
+      await expect(store.get(undefined as any)).rejects.toThrow('Session ID must be a non-empty value');
     });
 
     it('should reject session IDs with control characters', async () => {

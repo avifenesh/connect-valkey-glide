@@ -64,23 +64,26 @@ export class ValkeyStore extends Store {
   /**
    * Generate session key with prefix
    */
-  private key(sid: string): string {
+  private key(sid: string | number): string {
+    // Convert to string and validate - supports both string and numeric session IDs
+    const sessionId = String(sid);
+
     // Validate session ID to prevent injection attacks
-    if (!sid || typeof sid !== 'string') {
-      throw new TypeError('Session ID must be a non-empty string');
+    if (!sessionId || sessionId === 'undefined' || sessionId === 'null') {
+      throw new TypeError('Session ID must be a non-empty value');
     }
 
     // Check for dangerous characters that could cause issues
-    if (sid.includes('\0') || sid.includes('\n') || sid.includes('\r')) {
+    if (sessionId.includes('\0') || sessionId.includes('\n') || sessionId.includes('\r')) {
       throw new Error('Invalid session ID format: contains control characters');
     }
 
     // Reasonable length limit to prevent abuse
-    if (sid.length > 255) {
+    if (sessionId.length > 255) {
       throw new Error('Session ID too long: maximum 255 characters allowed');
     }
 
-    return `${this.prefix}${sid}`;
+    return `${this.prefix}${sessionId}`;
   }
 
 
@@ -104,9 +107,9 @@ export class ValkeyStore extends Store {
   /**
    * Get session data
    */
-  async get(sid: string): Promise<SessionData | null>;
-  async get(sid: string, callback: (err: any, session?: SessionData | null) => void): Promise<void>;
-  async get(sid: string, callback?: (err: any, session?: SessionData | null) => void): Promise<SessionData | null | void> {
+  async get(sid: string | number): Promise<SessionData | null>;
+  async get(sid: string | number, callback: (err: any, session?: SessionData | null) => void): Promise<void>;
+  async get(sid: string | number, callback?: (err: any, session?: SessionData | null) => void): Promise<SessionData | null | void> {
     const fn = (cb: (err: any, session?: SessionData | null) => void) => {
       const key = this.key(sid);
 
@@ -142,9 +145,9 @@ export class ValkeyStore extends Store {
   /**
    * Set session data
    */
-  async set(sid: string, session: SessionData): Promise<void>;
-  async set(sid: string, session: SessionData, callback: (err?: any) => void): Promise<void>;
-  async set(sid: string, session: SessionData, callback?: (err?: any) => void): Promise<void> {
+  async set(sid: string | number, session: SessionData): Promise<void>;
+  async set(sid: string | number, session: SessionData, callback: (err?: any) => void): Promise<void>;
+  async set(sid: string | number, session: SessionData, callback?: (err?: any) => void): Promise<void> {
     const fn = (cb: (err?: any) => void) => {
       const key = this.key(sid);
       const ttl = this.getTTL(session);
@@ -183,9 +186,9 @@ export class ValkeyStore extends Store {
   /**
    * Destroy session
    */
-  async destroy(sid: string): Promise<void>;
-  async destroy(sid: string, callback: (err?: any) => void): Promise<void>;
-  async destroy(sid: string, callback?: (err?: any) => void): Promise<void> {
+  async destroy(sid: string | number): Promise<void>;
+  async destroy(sid: string | number, callback: (err?: any) => void): Promise<void>;
+  async destroy(sid: string | number, callback?: (err?: any) => void): Promise<void> {
     const fn = (cb: (err?: any) => void) => {
       const key = this.key(sid);
 
@@ -202,9 +205,9 @@ export class ValkeyStore extends Store {
   /**
    * Touch session to update expiry
    */
-  async touch(sid: string, session: SessionData): Promise<void>;
-  async touch(sid: string, session: SessionData, callback: (err?: any) => void): Promise<void>;
-  async touch(sid: string, session: SessionData, callback?: (err?: any) => void): Promise<void> {
+  async touch(sid: string | number, session: SessionData): Promise<void>;
+  async touch(sid: string | number, session: SessionData, callback: (err?: any) => void): Promise<void>;
+  async touch(sid: string | number, session: SessionData, callback?: (err?: any) => void): Promise<void> {
     if (this.disableTouch) {
       if (callback) callback();
       return Promise.resolve();
@@ -467,7 +470,7 @@ export class ValkeyStore extends Store {
   /**
    * Load session (express-session compatibility)
    */
-  load(sid: string, callback: (err: any, session?: SessionData) => void): void {
+  load(sid: string | number, callback: (err: any, session?: SessionData) => void): void {
     // Same as get method but with different signature
     this.get(sid, (err: any, session?: SessionData | null) => {
       if (err) {
