@@ -20,8 +20,15 @@ export async function connect(): Promise<void> {
   }
 
   try {
-    // Start Docker Compose Valkey
+    // Clean up any existing containers first
     console.log('Starting Valkey for contract tests...');
+    try {
+      await execAsync('docker compose -f docker-compose.test.yml down -v --remove-orphans');
+    } catch {
+      // Ignore errors if nothing to clean up
+    }
+
+    // Start Docker Compose Valkey
     await execAsync('docker compose -f docker-compose.test.yml up -d valkey-standalone');
 
     // Wait for Valkey to be ready
