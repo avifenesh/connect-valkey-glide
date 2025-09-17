@@ -161,10 +161,7 @@ export class ValkeyStore extends Store {
         } : undefined;
 
         this.client.set(key, sessionData, setOptions)
-          .then(() => {
-            // Ensure callback is called after the promise resolves
-            process.nextTick(() => cb());
-          })
+          .then(() => cb())
           .catch((error) => {
             this.handleError(error, cb);
           });
