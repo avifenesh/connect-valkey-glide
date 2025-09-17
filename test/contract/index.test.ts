@@ -5,7 +5,6 @@
 
 import { Cookie, SessionData } from 'express-session';
 import { GlideClient } from '@valkey/valkey-glide';
-import { expect, test } from 'vitest';
 import { ValkeyStore } from '../../src';
 import * as valkeyServer from './testdata/server';
 

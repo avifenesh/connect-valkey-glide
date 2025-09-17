@@ -393,7 +393,7 @@ describe('Multi-Server Session Sharing', () => {
       agents[2].jar.setCookies(cookies);
 
       // Perform many operations across all servers
-      const operations = [];
+      const operations: Promise<any>[] = [];
       for (let i = 0; i < 30; i++) {
         const agent = agents[i % 3];
         operations.push(

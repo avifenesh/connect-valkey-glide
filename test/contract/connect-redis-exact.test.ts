@@ -51,17 +51,17 @@ test('teardown', valkeyServer.disconnect);
 
 async function lifecycleTest(store: ValkeyStore, client: any): Promise<void> {
   // Ensure we start with a clean slate
-  let res = await store.clear();
+  await store.clear();
 
   // Verify store is empty
-  res = await store.length();
-  expect(res).toBe(0);
+  let length = await store.length();
+  expect(length).toBe(0);
 
   let sess: any = { foo: 'bar', cookie: { originalMaxAge: null } };
   await store.set('123', sess);
 
-  res = await store.get('123');
-  expect(res).toEqual(sess);
+  let retrievedSess = await store.get('123');
+  expect(retrievedSess).toEqual(sess);
 
   let ttl = await client.ttl(`${store.prefix}123`);
   expect(ttl).toBeGreaterThanOrEqual(86399);
@@ -78,51 +78,51 @@ async function lifecycleTest(store: ValkeyStore, client: any): Promise<void> {
   ttl = await client.ttl(`${store.prefix}456`);
   expect(ttl).toBeGreaterThan(60);
 
-  res = await store.length();
-  expect(res).toBe(2); // stored two keys length
+  length = await store.length();
+  expect(length).toBe(2); // stored two keys length
 
-  res = await store.ids();
-  res.sort();
-  expect(res).toEqual(['123', '456']);
+  let ids = await store.ids();
+  ids.sort();
+  expect(ids).toEqual(['123', '456']);
 
-  res = await store.all();
+  let allSessions = await store.all();
   // Note: connect-redis adds session IDs to the results, but we don't
   // We need to check the sessions exist
-  expect(res).toBeDefined();
-  expect(res!['123']).toBeDefined();
-  expect(res!['456']).toBeDefined();
-  expect(res!['123'].foo).toBe('bar');
+  expect(allSessions).toBeDefined();
+  expect(allSessions!['123']).toBeDefined();
+  expect(allSessions!['456']).toBeDefined();
+  expect(allSessions!['123'].foo).toBe('bar');
 
   await store.destroy('456');
-  res = await store.length();
-  expect(res).toBe(1); // one key remains
+  length = await store.length();
+  expect(length).toBe(1); // one key remains
 
-  res = await store.clear();
+  await store.clear();
 
-  res = await store.length();
-  expect(res).toBe(0); // no keys remain
+  length = await store.length();
+  expect(length).toBe(0); // no keys remain
 
   let count = 1000;
   await load(store, count);
 
-  res = await store.length();
-  expect(res).toBe(count);
+  length = await store.length();
+  expect(length).toBe(count);
 
   await store.clear();
-  res = await store.length();
-  expect(res).toBe(0);
+  length = await store.length();
+  expect(length).toBe(0);
 
   expires = new Date(Date.now() + ttl * 1000); // expires in the future
-  res = await store.set('789', { cookie: { originalMaxAge: null, expires } });
+  await store.set('789', { cookie: { originalMaxAge: null, expires } });
 
-  res = await store.length();
-  expect(res).toBe(1);
+  length = await store.length();
+  expect(length).toBe(1);
 
   expires = new Date(Date.now() - ttl * 1000); // expires in the past
   await store.set('789', { cookie: { originalMaxAge: null, expires } });
 
-  res = await store.length();
-  expect(res).toBe(0); // no key remains and that includes session 789
+  length = await store.length();
+  expect(length).toBe(0); // no key remains and that includes session 789
 }
 
 async function load(store: ValkeyStore, count: number) {

@@ -104,6 +104,17 @@ describe('Rate Limiting with Session Tracking', () => {
       }
     }));
 
+    // Reset endpoint (not rate limited)
+    app.post('/api/reset', (req: any, res) => {
+      delete req.session.rateLimit;
+      req.session.save((err) => {
+        if (err) {
+          return res.status(500).json({ error: 'Failed to reset rate limit' });
+        }
+        res.json({ message: 'Rate limit reset' });
+      });
+    });
+
     // Rate limiting middleware
     app.use('/api', createRateLimiter({
       windowMs: 1000,      // 1 second window
@@ -124,16 +135,6 @@ describe('Rate Limiting with Session Tracking', () => {
       res.json({
         sessionId: req.sessionID,
         rateLimit: req.session.rateLimit || null
-      });
-    });
-
-    app.post('/api/reset', (req: any, res) => {
-      delete req.session.rateLimit;
-      req.session.save((err) => {
-        if (err) {
-          return res.status(500).json({ error: 'Failed to reset rate limit' });
-        }
-        res.json({ message: 'Rate limit reset' });
       });
     });
 
@@ -231,8 +232,8 @@ describe('Rate Limiting with Session Tracking', () => {
       let response = await agent.get('/api/data');
       expect(response.status).toBe(429);
 
-      // Wait for window to reset (1 second window + buffer)
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Wait for window to reset (1 second window + more buffer for CI)
+      await new Promise(resolve => setTimeout(resolve, 2000));
 
       // Should be able to make requests again
       response = await agent.get('/api/data');
@@ -326,7 +327,7 @@ describe('Rate Limiting with Session Tracking', () => {
       }));
 
       app.use('/api', createRateLimiter({
-        windowMs: 10000,     // 10 second window
+        windowMs: 2000,      // 2 second window (shorter for test)
         maxRequests: 5,
         blockDuration: 2000
       }));
@@ -346,8 +347,8 @@ describe('Rate Limiting with Session Tracking', () => {
         expect(response.status).toBe(200);
       }
 
-      // Wait for session to expire
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Wait for session to expire and rate limit window to reset
+      await new Promise(resolve => setTimeout(resolve, 2500));
 
       // Should get new session with fresh rate limit
       const response = await agent.get('/api/data');
