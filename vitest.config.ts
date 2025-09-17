@@ -7,5 +7,11 @@ export default defineConfig({
     testTimeout: 30000,
     setupFiles: [],
     include: ['test/contract/**/*.test.ts'],
+    pool: 'forks',
+    poolOptions: {
+      forks: {
+        singleFork: true,
+      },
+    },
   },
 });

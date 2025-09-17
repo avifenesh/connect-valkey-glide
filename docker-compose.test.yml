@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Single standalone Valkey instance for basic integration tests
   valkey-standalone:
