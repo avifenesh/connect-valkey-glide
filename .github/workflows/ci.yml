@@ -1,0 +1,307 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  lint-and-build:
+    name: Lint and Build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Format check
+        run: npm run format -- --check
+
+      - name: TypeScript check
+        run: npx tsc --noEmit
+
+  test-contract:
+    name: Contract Tests
+    runs-on: ubuntu-latest
+    needs: lint-and-build
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Run contract tests
+        run: npm run test:contract
+
+  test-standalone:
+    name: Standalone Tests
+    runs-on: ubuntu-latest
+    needs: lint-and-build
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Start Valkey standalone
+        run: |
+          docker run -d --name valkey-standalone \
+            -p 6379:6379 \
+            --health-cmd "valkey-cli ping" \
+            --health-interval 10s \
+            --health-timeout 5s \
+            --health-retries 5 \
+            valkey/valkey:8.0.1
+
+      - name: Wait for Valkey
+        run: |
+          until docker exec valkey-standalone valkey-cli ping; do
+            echo "Waiting for Valkey..."
+            sleep 1
+          done
+
+      - name: Run integration tests (excluding cluster)
+        run: npx jest test/integration --testPathIgnorePatterns=cluster
+
+      - name: Run E2E tests
+        run: npm run test:e2e
+
+      - name: Run performance tests
+        run: npx jest test/integration/performance.test.ts --testTimeout=60000
+
+      - name: Upload coverage
+        if: matrix.node-version == '20.x'
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
+          files: ./coverage/lcov.info
+
+      - name: Stop Valkey
+        if: always()
+        run: docker rm -f valkey-standalone
+
+  test-cluster:
+    name: Cluster Tests
+    runs-on: ubuntu-latest
+    needs: lint-and-build
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Start Valkey cluster
+        run: |
+          docker-compose -f docker-compose.cluster.yml up -d
+          echo "Waiting for cluster to initialize..."
+          sleep 20
+
+      - name: Verify cluster
+        run: |
+          docker exec $(docker ps -qf "name=redis-node-1") redis-cli -p 8001 cluster info
+          docker exec $(docker ps -qf "name=redis-node-1") redis-cli -p 8001 cluster nodes
+
+      - name: Run cluster tests
+        run: npx jest test/integration/cluster.test.ts --testTimeout=30000
+
+      - name: Stop cluster
+        if: always()
+        run: docker-compose -f docker-compose.cluster.yml down -v
+
+  test-all-modes:
+    name: All Tests (Standalone + Cluster)
+    runs-on: ubuntu-latest
+    needs: lint-and-build
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Start Valkey standalone
+        run: |
+          docker run -d --name valkey-standalone \
+            -p 6379:6379 \
+            valkey/valkey:8.0.1
+
+      - name: Start Valkey cluster
+        run: |
+          docker-compose -f docker-compose.cluster.yml up -d
+          sleep 20
+
+      - name: Wait for services
+        run: |
+          until docker exec valkey-standalone valkey-cli ping; do
+            echo "Waiting for standalone..."
+            sleep 1
+          done
+          docker exec $(docker ps -qf "name=redis-node-1") redis-cli -p 8001 cluster info
+
+      - name: Run all tests
+        run: |
+          npm run test:contract
+          npm run test:integration
+          npm run test:e2e
+
+      - name: Generate coverage report
+        run: npm run test:coverage
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
+          files: ./coverage/lcov.info
+
+      - name: Cleanup
+        if: always()
+        run: |
+          docker rm -f valkey-standalone || true
+          docker-compose -f docker-compose.cluster.yml down -v || true
+
+  build-examples:
+    name: Build Examples
+    runs-on: ubuntu-latest
+    needs: lint-and-build
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install main package dependencies
+        run: npm ci
+
+      - name: Build main package
+        run: npm run build
+
+      - name: Test example builds
+        run: |
+          # Add example build tests here when examples are added
+          echo "No examples to build yet"
+
+  security:
+    name: Security Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run audit
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+
+  publish-check:
+    name: Publish Readiness
+    runs-on: ubuntu-latest
+    needs: [test-contract, test-standalone, test-cluster, test-all-modes]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Pack package
+        run: npm pack --dry-run
+
+      - name: Check package contents
+        run: |
+          npm pack
+          tar -tzf *.tgz | head -20
+          rm *.tgz
+
+      - name: Check package size
+        run: |
+          SIZE=$(npm pack --dry-run 2>&1 | grep "npm notice package size:" | cut -d':' -f2 | xargs)
+          echo "Package size: $SIZE"
+          # Warn if package is larger than 500KB
+          SIZE_KB=$(echo $SIZE | sed 's/[^0-9.]//g')
+          if [[ $(echo $SIZE | grep -c "MB") -eq 1 ]]; then
+            echo "Warning: Package size is in MB"
+          fi

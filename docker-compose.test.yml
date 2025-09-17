@@ -1,0 +1,184 @@
+version: '3.8'
+
+services:
+  # Single standalone Valkey instance for basic integration tests
+  valkey-standalone:
+    image: valkey/valkey:8.0.1
+    ports:
+      - "6379:6379"
+    command: >
+      valkey-server
+      --appendonly yes
+      --appendfsync everysec
+      --maxmemory 256mb
+      --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+    volumes:
+      - valkey-standalone-data:/data
+    networks:
+      - valkey-test-network
+
+  # Valkey cluster for cluster testing (6 nodes: 3 primary + 3 replica)
+  valkey-node-1:
+    image: valkey/valkey:8.0.1
+    ports:
+      - "7001:7001"
+      - "17001:17001"
+    command: >
+      valkey-server
+      --port 7001
+      --cluster-enabled yes
+      --cluster-config-file nodes-7001.conf
+      --cluster-node-timeout 5000
+      --appendonly yes
+      --appendfsync everysec
+      --maxmemory 128mb
+      --maxmemory-policy allkeys-lru
+    volumes:
+      - valkey-node-1-data:/data
+    networks:
+      - valkey-test-network
+
+  valkey-node-2:
+    image: valkey/valkey:8.0.1
+    ports:
+      - "7002:7002"
+      - "17002:17002"
+    command: >
+      valkey-server
+      --port 7002
+      --cluster-enabled yes
+      --cluster-config-file nodes-7002.conf
+      --cluster-node-timeout 5000
+      --appendonly yes
+      --appendfsync everysec
+      --maxmemory 128mb
+      --maxmemory-policy allkeys-lru
+    volumes:
+      - valkey-node-2-data:/data
+    networks:
+      - valkey-test-network
+
+  valkey-node-3:
+    image: valkey/valkey:8.0.1
+    ports:
+      - "7003:7003"
+      - "17003:17003"
+    command: >
+      valkey-server
+      --port 7003
+      --cluster-enabled yes
+      --cluster-config-file nodes-7003.conf
+      --cluster-node-timeout 5000
+      --appendonly yes
+      --appendfsync everysec
+      --maxmemory 128mb
+      --maxmemory-policy allkeys-lru
+    volumes:
+      - valkey-node-3-data:/data
+    networks:
+      - valkey-test-network
+
+  valkey-node-4:
+    image: valkey/valkey:8.0.1
+    ports:
+      - "7004:7004"
+      - "17004:17004"
+    command: >
+      valkey-server
+      --port 7004
+      --cluster-enabled yes
+      --cluster-config-file nodes-7004.conf
+      --cluster-node-timeout 5000
+      --appendonly yes
+      --appendfsync everysec
+      --maxmemory 128mb
+      --maxmemory-policy allkeys-lru
+    volumes:
+      - valkey-node-4-data:/data
+    networks:
+      - valkey-test-network
+
+  valkey-node-5:
+    image: valkey/valkey:8.0.1
+    ports:
+      - "7005:7005"
+      - "17005:17005"
+    command: >
+      valkey-server
+      --port 7005
+      --cluster-enabled yes
+      --cluster-config-file nodes-7005.conf
+      --cluster-node-timeout 5000
+      --appendonly yes
+      --appendfsync everysec
+      --maxmemory 128mb
+      --maxmemory-policy allkeys-lru
+    volumes:
+      - valkey-node-5-data:/data
+    networks:
+      - valkey-test-network
+
+  valkey-node-6:
+    image: valkey/valkey:8.0.1
+    ports:
+      - "7006:7006"
+      - "17006:17006"
+    command: >
+      valkey-server
+      --port 7006
+      --cluster-enabled yes
+      --cluster-config-file nodes-7006.conf
+      --cluster-node-timeout 5000
+      --appendonly yes
+      --appendfsync everysec
+      --maxmemory 128mb
+      --maxmemory-policy allkeys-lru
+    volumes:
+      - valkey-node-6-data:/data
+    networks:
+      - valkey-test-network
+
+  # Cluster initialization container
+  valkey-cluster-init:
+    image: valkey/valkey:8.0.1
+    depends_on:
+      - valkey-node-1
+      - valkey-node-2
+      - valkey-node-3
+      - valkey-node-4
+      - valkey-node-5
+      - valkey-node-6
+    command: >
+      bash -c "
+        sleep 10 &&
+        valkey-cli --cluster create
+        valkey-node-1:7001
+        valkey-node-2:7002
+        valkey-node-3:7003
+        valkey-node-4:7004
+        valkey-node-5:7005
+        valkey-node-6:7006
+        --cluster-replicas 1
+        --cluster-yes
+      "
+    networks:
+      - valkey-test-network
+
+networks:
+  valkey-test-network:
+    driver: bridge
+
+volumes:
+  valkey-standalone-data:
+  valkey-node-1-data:
+  valkey-node-2-data:
+  valkey-node-3-data:
+  valkey-node-4-data:
+  valkey-node-5-data:
+  valkey-node-6-data:

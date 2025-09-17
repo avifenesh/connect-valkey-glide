@@ -1,0 +1,64 @@
+# Source files (TypeScript)
+src/
+*.ts
+!dist/**/*.d.ts
+
+# Test files
+test/
+tests/
+__tests__/
+*.test.js
+*.test.ts
+*.spec.js
+*.spec.ts
+jest.config.js
+vitest.config.ts
+coverage/
+.nyc_output/
+
+# Configuration files
+.github/
+.vscode/
+.idea/
+.eslintrc*
+.prettierrc*
+tsconfig.json
+tsconfig.*.json
+*.config.js
+*.config.ts
+
+# Documentation source
+docs/
+*.md
+!README.md
+!LICENSE
+
+# Docker and CI
+docker-compose*.yml
+Dockerfile*
+.dockerignore
+scripts/
+valkey-cluster/
+
+# Development files
+.env*
+.editorconfig
+.gitignore
+.npmignore
+.nvmrc
+
+# Examples (users should get from GitHub)
+examples/
+
+# Build artifacts
+*.tsbuildinfo
+*.log
+*.tgz
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitattributes

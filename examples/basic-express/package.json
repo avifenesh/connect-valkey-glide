@@ -1,0 +1,28 @@
+{
+  "name": "connect-valkey-glide-basic-example",
+  "version": "1.0.0",
+  "description": "Basic Express application demonstrating ValkeyStore usage",
+  "main": "dist/app.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "dev": "ts-node app.ts",
+    "dev:watch": "ts-node --watch app.ts"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "@valkey/valkey-glide": "^2.0.0",
+    "connect-valkey-glide": "file:../../"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.0",
+    "@types/express": "^5.0.3",
+    "@types/express-session": "^1.17.0",
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

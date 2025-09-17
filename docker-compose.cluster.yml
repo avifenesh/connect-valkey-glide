@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  redis-node-1:
+    image: redis:7-alpine
+    ports:
+      - "8001:8001"
+    command: redis-server --port 8001 --cluster-enabled yes --cluster-config-file nodes.conf --cluster-node-timeout 5000 --appendonly no --save "" --cluster-require-full-coverage no
+    networks:
+      - redis-cluster
+
+  redis-node-2:
+    image: redis:7-alpine
+    ports:
+      - "8002:8002"
+    command: redis-server --port 8002 --cluster-enabled yes --cluster-config-file nodes.conf --cluster-node-timeout 5000 --appendonly no --save "" --cluster-require-full-coverage no
+    networks:
+      - redis-cluster
+
+  redis-node-3:
+    image: redis:7-alpine
+    ports:
+      - "8003:8003"
+    command: redis-server --port 8003 --cluster-enabled yes --cluster-config-file nodes.conf --cluster-node-timeout 5000 --appendonly no --save "" --cluster-require-full-coverage no
+    networks:
+      - redis-cluster
+
+  redis-cluster-init:
+    image: redis:7-alpine
+    depends_on:
+      - redis-node-1
+      - redis-node-2
+      - redis-node-3
+    networks:
+      - redis-cluster
+    command: sh -c "
+      sleep 5 &&
+      echo 'yes' | redis-cli --cluster create
+      redis-node-1:8001
+      redis-node-2:8002
+      redis-node-3:8003
+      --cluster-replicas 0"
+
+networks:
+  redis-cluster:
+    driver: bridge

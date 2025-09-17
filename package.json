@@ -1,0 +1,93 @@
+{
+  "name": "connect-valkey-glide",
+  "version": "1.0.0",
+  "description": "Valkey session store for Connect/Express using valkey-glide client",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run test:contract && npm run test:real",
+    "test:contract": "vitest run",
+    "test:integration": "jest --testPathPatterns='test/integration/'",
+    "test:integration:standalone": "jest --testPathPatterns='test/integration/' --testPathIgnorePatterns='cluster'",
+    "test:integration:cluster": "jest test/integration/cluster.test.ts",
+    "test:e2e": "jest --testPathPatterns='test/e2e/'",
+    "test:load": "jest --testPathPatterns='test/e2e/load-test.test.ts'",
+    "test:performance": "jest test/integration/performance.test.ts --testTimeout=60000",
+    "test:real": "npm run valkey:start && npm run test:integration && npm run test:e2e && npm run valkey:stop",
+    "test:standalone": "npm run valkey:start && npm run test:integration:standalone && npm run test:e2e && npm run valkey:stop",
+    "test:cluster": "npm run cluster:setup && npm run test:integration:cluster; npm run cluster:stop",
+    "test:all": "npm run test:contract && npm run test:standalone && npm run test:cluster",
+    "test:ci": "npm run test:contract && npm run test:real",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "clean": "npm run valkey:stop && docker system prune -f --volumes",
+    "valkey:start": "npm run valkey:stop && docker-compose -f docker-compose.test.yml up -d && npm run valkey:wait",
+    "valkey:stop": "docker-compose -f docker-compose.test.yml down -v --remove-orphans",
+    "valkey:wait": "node -e \"require('./test/utils/wait-for-valkey.js')\"",
+    "valkey:logs": "docker-compose -f docker-compose.test.yml logs -f",
+    "valkey:reset": "npm run clean && npm run valkey:start",
+    "valkey:status": "docker-compose -f docker-compose.test.yml ps",
+    "cluster:setup": "./scripts/setup-cluster.sh",
+    "cluster:stop": "./scripts/stop-cluster.sh",
+    "cluster:test": "npm run cluster:setup && npm run test:integration -- test/integration/cluster.test.ts; npm run cluster:stop",
+    "lint": "eslint src test --ext .ts",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "prepublishOnly": "npm run build && npm run test:ci"
+  },
+  "keywords": [
+    "valkey-glide",
+    "glide",
+    "express",
+    "connect",
+    "session",
+    "valkey",
+    "redis",
+    "GLIDE",
+    "client",
+    "cluster",
+    "compatible",
+    "store",
+    "cache"
+  ],
+  "author": "Avi Fenesh",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avifenesh/connect-valkey-glide.git"
+  },
+  "bugs": {
+    "url": "https://github.com/avifenesh/connect-valkey-glide/issues"
+  },
+  "homepage": "https://github.com/avifenesh/connect-valkey-glide#readme",
+  "peerDependencies": {
+    "@valkey/valkey-glide": "^2.0.0",
+    "express-session": "^1.17.0"
+  },
+  "devDependencies": {
+    "@types/express": "5.0.3",
+    "@types/express-session": "^1.17.0",
+    "@types/jest": "30.0.0",
+    "@types/node": "24.5.0",
+    "@types/supertest": "^6.0.2",
+    "@typescript-eslint/eslint-plugin": "8.44.0",
+    "@typescript-eslint/parser": "8.44.0",
+    "eslint": "9.35.0",
+    "express": "5.1.0",
+    "express-session": "^1.18.1",
+    "jest": "30.1.3",
+    "prettier": "^3.0.0",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ]
+}
