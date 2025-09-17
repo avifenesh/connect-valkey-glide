@@ -109,6 +109,10 @@ export class ValkeyStore extends Store {
 
       this.client.get(key)
         .then((data) => {
+          // Debug logging for CI issues
+          if (process.env.CI && sid.includes('crud')) {
+            console.log('Raw data from Valkey:', data);
+          }
           if (!data) {
             return cb(null, null);
           }
@@ -169,8 +173,18 @@ export class ValkeyStore extends Store {
         } : undefined;
 
         this.client.set(key, sessionData, setOptions)
-          .then(() => cb())
+          .then(() => {
+            // Debug logging for CI issues
+            if (process.env.CI && sid.includes('crud')) {
+              console.log('Session set successfully for key:', key);
+            }
+            cb();
+          })
           .catch((error) => {
+            // Debug logging for CI issues
+            if (process.env.CI && sid.includes('crud')) {
+              console.log('Error setting session:', error);
+            }
             this.handleError(error, cb);
           });
       } catch (error) {
