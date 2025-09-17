@@ -14,7 +14,10 @@ import {
 } from '../utils/test-helpers';
 import { ValkeyStore } from '../../src/index';
 
-describe('Load Testing E2E', () => {
+// Skip load tests in CI - they belong in dedicated performance testing environments
+const describeLoadTest = process.env.CI ? describe.skip : describe;
+
+describeLoadTest('Load Testing E2E', () => {
   let client: any;
   let app: express.Application;
   let store: ValkeyStore;

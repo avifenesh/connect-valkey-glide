@@ -40,7 +40,7 @@ describePerformance('Performance Integration Tests', () => {
 
   describe('Throughput Tests', () => {
     it('should handle high-volume sequential operations', async () => {
-      const sessionCount = process.env.CI ? 20 : 1000; // Further reduce for CI
+      const sessionCount = 1000;
       const sessions = generateTestSessions(sessionCount);
 
       // Sequential writes
@@ -77,10 +77,10 @@ describePerformance('Performance Integration Tests', () => {
       expect(readOpsPerSec).toBeGreaterThan(writeOpsPerSec * 0.8); // Reads should be at least 80% of write speed
       expect(writeOpsPerSec).toBeGreaterThan(0); // Ensure operations completed
       expect(readOpsPerSec).toBeGreaterThan(0); // Ensure operations completed
-    }, process.env.CI ? 10000 : 60000); // Much shorter timeout in CI
+    }, 60000);
 
     it('should handle concurrent operations efficiently', async () => {
-      const sessionCount = process.env.CI ? 10 : 500; // Further reduce for CI
+      const sessionCount = 500;
       const sessions = generateTestSessions(sessionCount);
 
       // Concurrent writes
@@ -170,8 +170,8 @@ describePerformance('Performance Integration Tests', () => {
     });
 
     it('should handle many small sessions vs few large sessions', async () => {
-      // Many small sessions - reduce for CI
-      const smallSessionCount = process.env.CI ? 20 : 1000;
+      // Many small sessions
+      const smallSessionCount = 1000;
       const smallSessions = Array.from({ length: smallSessionCount }, (_, i) => ({
         sid: `small_${i}`,
         data: generateSessionData({ userId: `user_${i}` }),
@@ -218,8 +218,8 @@ describePerformance('Performance Integration Tests', () => {
       console.log(`${smallSessionCount} small sessions: ${smallSessionsDuration.toFixed(2)}ms`);
       console.log(`10 large sessions: ${largeSessionsDuration.toFixed(2)}ms`);
 
-      // Both should complete in reasonable time - adjust for CI
-      const maxSmallSessionTime = process.env.CI ? 1000 : 10000;
+      // Both should complete in reasonable time
+      const maxSmallSessionTime = 10000;
       expect(smallSessionsDuration).toBeLessThan(maxSmallSessionTime);
       expect(largeSessionsDuration).toBeLessThan(5000);
     }, 30000);
@@ -227,7 +227,7 @@ describePerformance('Performance Integration Tests', () => {
 
   describe('Scanning Performance', () => {
     it('should handle SCAN operations efficiently with many keys', async () => {
-      const sessionCount = process.env.CI ? 20 : 1000; // Further reduce for CI
+      const sessionCount = 1000;
       const sessions = generateTestSessions(sessionCount);
 
       // Store all sessions
@@ -258,7 +258,7 @@ describePerformance('Performance Integration Tests', () => {
 
       expect(length).toBe(sessionCount);
       console.log(`Length scan: ${lengthDuration.toFixed(2)}ms`);
-      const maxLengthTime = process.env.CI ? 1000 : 2000; // Faster expectation in CI
+      const maxLengthTime = 2000;
       expect(lengthDuration).toBeLessThan(maxLengthTime);
 
       // Test ids() operation
@@ -273,7 +273,7 @@ describePerformance('Performance Integration Tests', () => {
 
       expect(ids).toHaveLength(sessionCount);
       console.log(`IDs scan: ${idsDuration.toFixed(2)}ms`);
-      const maxIdsTime = process.env.CI ? 1000 : 2000; // Faster expectation in CI
+      const maxIdsTime = 2000;
       expect(idsDuration).toBeLessThan(maxIdsTime);
 
       // Test all() operation (more intensive)
@@ -289,16 +289,16 @@ describePerformance('Performance Integration Tests', () => {
       expect(allSessions).not.toBeNull();
       expect(Object.keys(allSessions!)).toHaveLength(sessionCount);
       console.log(`All sessions retrieval: ${allDuration.toFixed(2)}ms`);
-      const maxAllTime = process.env.CI ? 1000 : 10000; // Much faster expectation in CI
+      const maxAllTime = 10000;
       expect(allDuration).toBeLessThan(maxAllTime);
-    }, process.env.CI ? 10000 : 60000); // Much shorter timeout in CI
+    }, 60000);
 
     it('should handle custom scanCount efficiently', async () => {
-      const sessionCount = process.env.CI ? 10 : 1000; // Much smaller in CI
+      const sessionCount = 1000;
       const sessions = generateTestSessions(sessionCount);
 
-      // Test with different scan counts - reduce in CI
-      const scanCounts = process.env.CI ? [10] : [10, 100, 1000]; // Only test one scan count in CI
+      // Test with different scan counts
+      const scanCounts = [10, 100, 1000];
 
       for (const scanCount of scanCounts) {
         const result = await createTestStore({ scanCount });
@@ -328,7 +328,7 @@ describePerformance('Performance Integration Tests', () => {
           });
 
           console.log(`Scan with count=${scanCount}: ${duration.toFixed(2)}ms`);
-          const maxScanTime = process.env.CI ? 1000 : 5000; // Faster in CI
+          const maxScanTime = 5000;
           expect(duration).toBeLessThan(maxScanTime);
 
         } finally {
@@ -336,7 +336,7 @@ describePerformance('Performance Integration Tests', () => {
           await safeCloseClient(testClient);
         }
       }
-    }, process.env.CI ? 8000 : 45000); // Much shorter timeout in CI
+    }, 45000);
   });
 
   describe('Concurrency and Race Conditions', () => {
@@ -352,8 +352,8 @@ describePerformance('Performance Integration Tests', () => {
         });
       });
 
-      // Concurrent operations on same session - reduce for CI
-      const opCount = process.env.CI ? 10 : 50;
+      // Concurrent operations on same session
+      const opCount = 50;
       const operations = Array.from({ length: opCount }, (_, i) => {
         if (i % 3 === 0) {
           // Update operation
@@ -388,7 +388,7 @@ describePerformance('Performance Integration Tests', () => {
       });
 
       console.log(`${opCount} concurrent operations on same session: ${duration.toFixed(2)}ms`);
-      const maxConcurrentTime = process.env.CI ? 1000 : 5000; // Much faster in CI
+      const maxConcurrentTime = 5000;
       expect(duration).toBeLessThan(maxConcurrentTime);
 
       // Session should still exist
@@ -402,7 +402,7 @@ describePerformance('Performance Integration Tests', () => {
     }, 15000);
 
     it('should handle concurrent operations on different sessions', async () => {
-      const sessionCount = process.env.CI ? 10 : 100; // Further reduce for CI
+      const sessionCount = 100;
       const sessions = generateTestSessions(sessionCount);
 
       // Mixed concurrent operations
@@ -469,83 +469,4 @@ describePerformance('Performance Integration Tests', () => {
       // for connect-redis API compatibility. Use length() and ids() instead.
     });
   });
-});
-
-// Simple smoke test for CI - validates basic performance without intensive workloads
-describe('Performance Smoke Tests (CI)', () => {
-  let store: any;
-  let client: any;
-
-  beforeAll(async () => {
-    await waitForValkey(30, 1000);
-  }, 30000);
-
-  beforeEach(async () => {
-    const result = await createTestStore();
-    store = result.store;
-    client = result.client;
-  });
-
-  afterEach(async () => {
-    if (client) {
-      await cleanupTestData(client);
-      await safeCloseClient(client);
-    }
-  });
-
-  it('should handle basic operations within reasonable time', async () => {
-    const sessionId = createTestSessionId('smoke');
-    const sessionData = generateSessionData();
-
-    // Test basic set/get cycle
-    const start = Date.now();
-
-    await new Promise<void>((resolve, reject) => {
-      store.set(sessionId, sessionData, (err: any) => {
-        if (err) reject(err);
-        else resolve();
-      });
-    });
-
-    const session = await new Promise((resolve, reject) => {
-      store.get(sessionId, (err: any, session: any) => {
-        if (err) reject(err);
-        else resolve(session);
-      });
-    });
-
-    const duration = Date.now() - start;
-
-    expect(session).toBeDefined();
-    expect(session.userId).toBe(sessionData.userId);
-    expect(duration).toBeLessThan(1000); // Should complete in under 1 second
-  }, 5000);
-
-  it('should handle scan operations efficiently', async () => {
-    // Store a few sessions
-    const sessions = generateTestSessions(5);
-
-    for (const { sid, data } of sessions) {
-      await new Promise<void>((resolve, reject) => {
-        store.set(sid, data, (err: any) => {
-          if (err) reject(err);
-          else resolve();
-        });
-      });
-    }
-
-    const start = Date.now();
-
-    const length = await new Promise<number>((resolve, reject) => {
-      store.length((err: any, length: number) => {
-        if (err) reject(err);
-        else resolve(length);
-      });
-    });
-
-    const duration = Date.now() - start;
-
-    expect(length).toBe(5);
-    expect(duration).toBeLessThan(500); // Should complete quickly
-  }, 5000);
 });

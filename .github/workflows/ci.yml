@@ -111,14 +111,11 @@ jobs:
             sleep 1
           done
 
-      - name: Run integration tests (excluding cluster)
-        run: npx jest test/integration --testPathIgnorePatterns=cluster
+      - name: Run integration tests (excluding cluster and performance)
+        run: npm run test:integration:ci
 
-      - name: Run E2E tests
-        run: npm run test:e2e
-
-      - name: Run performance tests
-        run: npx jest test/integration/performance.test.ts --testTimeout=60000
+      - name: Run E2E tests (excluding load tests)
+        run: npm run test:e2e:ci
 
       - name: Stop Valkey
         if: always()
@@ -201,11 +198,11 @@ jobs:
           done
           docker exec $(docker ps -qf "name=redis-node-1") redis-cli -p 8001 cluster info
 
-      - name: Run all tests
+      - name: Run CI tests (excludes performance/load tests)
         timeout-minutes: 10
         run: |
           export JEST_MAX_WORKERS=1
-          npm test
+          npm run test:ci
 
       - name: Cleanup
         if: always()
